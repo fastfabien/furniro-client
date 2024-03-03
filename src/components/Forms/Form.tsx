@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ErrorMessage,
   InputContainer,
@@ -6,8 +6,18 @@ import {
   Label,
   Textarea,
   InputSubscribeContent,
+  InputFilesContainer,
+  InputFile,
+  LabelInputfiles,
+  InputImageContent,
 } from "../../Styles";
-import { FormProps, SubscribeFormProps, handleInputChange } from "../../common";
+import {
+  FormProps,
+  SubscribeFormProps,
+  addImageToContainer,
+  handleInputChange,
+  setInputFilesValue,
+} from "../../common";
 
 export const Input = ({
   type,
@@ -61,5 +71,56 @@ export const InputSubscribe = ({ label }: SubscribeFormProps) => {
       />
       {error && <ErrorMessage>Invalid email value</ErrorMessage>}
     </InputContainer>
+  );
+};
+
+interface InputFilesProps {
+  label: string;
+}
+
+export const InputFiles = ({ label }: InputFilesProps) => {
+  const [inputFiles, setInputFiles] = useState<FileList | null>(null);
+  const [inputValue, setInputValue] = useState("");
+  const imageContainer = document.getElementById("form-image-content");
+
+  useEffect(() => {
+    if (inputFiles) {
+      for (let i: number = 0; i < inputFiles.length; i++) {
+        const file = inputFiles[i];
+        const url = URL.createObjectURL(file);
+
+        if (imageContainer) {
+          addImageToContainer(
+            imageContainer,
+            url,
+            i,
+            inputFiles,
+            setInputValue,
+            setInputFiles
+          );
+        }
+      }
+    }
+  }, [inputFiles, imageContainer, inputValue]);
+
+  const handleInputFilesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    setInputFiles(files);
+    setInputFilesValue(files, setInputValue);
+  };
+
+  return (
+    <InputFilesContainer>
+      <LabelInputfiles htmlFor="images">{label}</LabelInputfiles>
+      <InputFile
+        id="images"
+        type="file"
+        accept="image/*"
+        defaultValue={inputValue}
+        onChange={(e) => handleInputFilesChange(e)}
+        multiple={true}
+      />
+      <InputImageContent id="form-image-content"></InputImageContent>
+    </InputFilesContainer>
   );
 };

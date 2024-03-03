@@ -50,7 +50,7 @@ export const InputContainer = styled.div`
   }
 `;
 
-export const Label = styled.span`
+export const Label = styled.label`
   font-weight: 600;
   color: ${(p) => p.theme.black};
   text-transform: capitalize;
@@ -98,4 +98,69 @@ export const SubscribeContainer = styled.form`
   display: flex;
   flex-direction: row;
   gap: 11px;
+`;
+
+export const InputFilesContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2vw;
+`;
+
+export const InputFile = styled.input`
+  display: none;
+`;
+
+export const LabelInputfiles = styled.label`
+  height: 3vw;
+  width: 30%;
+  background-color: ${(p) => p.theme.blackGray};
+  padding: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  color: ${(p) => p.theme.white};
+  font-size: 1.3vw;
+  font-weight: 800;
+  cursor: pointer;
+`;
+
+export const InputImageContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  padding: 1vw;
+  background-color: ${(p) => p.theme.lightPeach};
+
+  & .image-container {
+    width: 5vw;
+    height: 5vw;
+    position: relative;
+
+    &:hover span {
+      display: block;
+    }
+  }
+
+  & span {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1vw;
+    font-weight: 400;
+    padding: 0.1vw 0.5vw;
+    background-color: rgba(${(p) => p.theme.dimgrayRgba}, 0.5);
+    border-radius: 50%;
+    color: ${(p) => p.theme.white};
+    cursor: pointer;
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
