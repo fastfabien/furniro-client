@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   LinkText,
   NavbarAction,
@@ -8,16 +8,21 @@ import {
   RoundedUser,
 } from "../../Styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
+import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import {
   faCartShopping,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
+import { LoginAction } from "../Action";
+import { LogOut } from "../LogOut";
 
 const Navbar = () => {
   const { user } = useSelector((state: RootState) => state.auth);
+  const [showLogin, setShowLogin] = useState<boolean>(false);
+
+  useEffect(() => {}, [user]);
 
   return (
     <NavbarContainer>
@@ -32,9 +37,7 @@ const Navbar = () => {
         {user ? (
           <RoundedUser>{user.name[0]}</RoundedUser>
         ) : (
-          <LinkText to="/login">
-            <FontAwesomeIcon icon={faUser} />
-          </LinkText>
+          <LoginAction showLogin={showLogin} setShowLogin={setShowLogin} />
         )}
         <LinkText to="/">
           <FontAwesomeIcon icon={faMagnifyingGlass} />
@@ -45,6 +48,7 @@ const Navbar = () => {
         <LinkText to="/cart">
           <FontAwesomeIcon icon={faCartShopping} />
         </LinkText>
+        {user && <LogOut />}
       </NavbarAction>
     </NavbarContainer>
   );

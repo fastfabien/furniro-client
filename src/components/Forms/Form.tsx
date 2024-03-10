@@ -76,9 +76,10 @@ export const InputSubscribe = ({ label }: SubscribeFormProps) => {
 
 interface InputFilesProps {
   label: string;
+  name: string;
 }
 
-export const InputFiles = ({ label }: InputFilesProps) => {
+export const InputFiles = ({ label, name }: InputFilesProps) => {
   const [inputFiles, setInputFiles] = useState<FileList | null>(null);
   const [inputValue, setInputValue] = useState("");
   const imageContainer = document.getElementById("form-image-content");
@@ -116,9 +117,9 @@ export const InputFiles = ({ label }: InputFilesProps) => {
         id="images"
         type="file"
         accept="image/*"
-        defaultValue={inputValue}
+        name={name}
         onChange={(e) => handleInputFilesChange(e)}
-        multiple={true}
+        multiple
       />
       <InputImageContent id="form-image-content"></InputImageContent>
     </InputFilesContainer>

@@ -9,6 +9,7 @@ export const NavbarContainer = styled.div`
   flex-direction: row;
   justify-content: space-between;
   background-color: ${(p) => p.theme.white};
+  z-index: 20;
 `;
 
 export const NavbarLogo = styled(Link)`

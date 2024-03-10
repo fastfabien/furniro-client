@@ -24,6 +24,12 @@ interface LoginInfo {
   password: string;
 }
 
+interface RegisterInfo {
+  name: string;
+  email: string;
+  password: string;
+}
+
 const localStorageValue: string | null = localStorage.getItem("user");
 
 const localuser: ParsedLocalStorageValue = localStorageValue
@@ -40,7 +46,7 @@ const initialState: UserState = {
 
 export const register = createAsyncThunk(
   "auth/register",
-  async (user, thunkAPI) => {
+  async (user: RegisterInfo, thunkAPI) => {
     try {
       return await authService.register(user);
     } catch (error: any) {
@@ -53,6 +59,11 @@ export const register = createAsyncThunk(
       return thunkAPI.rejectWithValue(message);
     }
   }
+);
+
+export const signOut = createAsyncThunk(
+  "auth/signOut",
+  async () => await authService.signOut()
 );
 
 export const login = createAsyncThunk(

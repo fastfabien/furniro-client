@@ -5,7 +5,7 @@ import { InputFiles } from "../components";
 export const Sample = () => {
   return (
     <SampleContainer>
-      <InputFiles label="Enter your files" />
+      {/* <InputFiles label="Enter your files" /> */}
     </SampleContainer>
   );
 };

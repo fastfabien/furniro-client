@@ -1,10 +1,13 @@
 import axios from "axios";
-import { Product } from "./product.slice";
 
 const API_URL = "/api/products/";
 
-const createProduct = async (product: Product) => {
-  const response = await axios.post(API_URL, product);
+const createProduct = async (product: any) => {
+  const response = await axios.post(API_URL, product, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
   if (response) {
     return response.data;
   }

@@ -60,6 +60,22 @@ export const LinkText = styled(Link)`
   }
 `;
 
+export const NavText = styled.span`
+  font-size: 1.5vw;
+  font-weight: 500;
+  line-height: auto;
+  color: ${(p) => p.theme.black};
+  cursor: pointer;
+
+  & svg {
+    font-size: inherit;
+  }
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export const RoundedUser = styled.div`
   background-color: ${(p) => p.theme.black};
   padding: 0.25vw 0.8vw;

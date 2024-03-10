@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import "@fontsource/poppins";
 
-
 const GlobalStyles = createGlobalStyle`
     *,*::before,*::after {
         margin: 0;
@@ -14,6 +13,8 @@ const GlobalStyles = createGlobalStyle`
         overflow-x: hidden;
         font-size: 1.1vw;
         scrollbar-width: none;
+        max-width: 2500px;
+        margin: 0 auto;
     }
 
     body::-webkit-scrollbar {
@@ -33,6 +34,5 @@ const GlobalStyles = createGlobalStyle`
         visibility: hidden;
     }
 `;
-
 
 export { GlobalStyles };

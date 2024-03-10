@@ -15,7 +15,6 @@ function App() {
           {/* Client */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/test" element={<Sample />} />
 
           {/* Admin */}

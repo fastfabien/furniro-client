@@ -65,7 +65,7 @@ export const InputSubmit = styled.input`
   border: 1px solid ${(p) => p.theme.gold};
   background-color: ${(p) => p.theme.gold};
   color: ${(p) => p.theme.white};
-  margin-top: 3.4722222222222223vw;
+  // margin-top: 3.4722222222222223vw;
 
   &:hover {
     background-color: ${(p) => p.theme.white};

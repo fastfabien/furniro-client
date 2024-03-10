@@ -5,7 +5,6 @@ import {
   Form,
   FormContainer,
   FormContent,
-  InputFile,
   Wrapper,
 } from "../../../Styles";
 import { Input, InputFiles, SubmitButton } from "../../../components";
@@ -26,23 +25,35 @@ export const CreateProduct = () => {
   useEffect(() => {
     if (isSuccess) {
       reset();
-      navigate("/admin/products");
     }
   }, [isError, isSuccess, isLoading, message, dispatch, navigate]);
 
-  const handleCreateProduct = (e: any): void => {
+  const handleCreateProduct = async (e: any) => {
     e.preventDefault();
 
-    const formData = e.target;
+    const inputFile: HTMLInputElement | null = document.querySelector(
+      'input[name="images"]'
+    );
+    const inputFilesValue: FileList | null = inputFile?.files || null;
 
-    const formValue: any = {};
+    const formData = new FormData();
 
-    for (let i = 0; i < formData.length; i++) {
-      formValue[formData[i].name] = formData[i].value;
+    for (let i = 0; i < e.target.length; i++) {
+      const element = e.target[i];
+      if (element.type !== "file") {
+        formData.append(element.name, element.value);
+      }
     }
 
-    dispatch(createProduct(formValue));
+    if (inputFilesValue) {
+      for (let i = 0; i < inputFilesValue.length; i++) {
+        formData.append("images", inputFilesValue[i]);
+      }
+    }
+
+    dispatch(createProduct(formData));
   };
+
   return (
     <AdminLayout pageName="Create product">
       <Wrapper>
@@ -61,10 +72,10 @@ export const CreateProduct = () => {
             <FormContent>
               <Input type="text" label="Size" name="size" />
               <Input type="text" label="Sku" name="sku" />
-              <InputFiles label="Images" />
+              <InputFiles label="Images" name="images" />
             </FormContent>
           </FormContainer>
-          {isError && <ErrorMessage>{message}</ErrorMessage>}
+          <ErrorMessage>{message}</ErrorMessage>
           <SubmitButton>Create product</SubmitButton>
         </Form>
       </Wrapper>

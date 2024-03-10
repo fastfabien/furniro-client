@@ -164,3 +164,22 @@ export const InputImageContent = styled.div`
     object-fit: cover;
   }
 `;
+
+export const FormFooter = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 2vw;
+`;
+
+export const TextedLink = styled.span`
+  color: ${(p) => p.theme.gold};
+  font-weight: 800;
+  font-size: 1.2vw;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;

@@ -41,11 +41,19 @@ const removeImage = (
   setInputValue: React.Dispatch<React.SetStateAction<string>>,
   setInputFiles: React.Dispatch<React.SetStateAction<FileList | null>>
 ): void => {
+  // let newFilesValues: FileList[] | null;
   if (files) {
     const filesArray = Array.from(files);
     const newValue = filesArray.slice(index, 1);
     const filesNames = newValue.map((file) => file.name);
     const value = filesNames.join(", ");
+
+    // for (let i = 0; i < files.length; i++) {
+    //   if (files[i] !== files[index]) {
+    //     newFilesValues!.concat(newValue);
+    //   }
+    // }
+
     setInputValue(value);
     container.removeChild(content);
   }
