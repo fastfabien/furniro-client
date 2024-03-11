@@ -57,3 +57,12 @@ export const CurrentImages: any = styled.div<ImageProps>`
   background-size: cover;
   height: 34.72222222222222vw;
 `;
+
+export const ProductContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 7.291666666666667vw;
+`;
+
+export const ProductInfo = styled.div``;

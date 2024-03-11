@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../../app/hook";
 import { getProduct } from "../../../features/product/product.slice";
 import { reset } from "../../../features/auth/authSlice";
 import { ProductImages } from "../../../components";
-import { Wrapper } from "../../../Styles";
+import { ProductContainer, ProductInfo, Wrapper } from "../../../Styles";
 
 interface ImageObject {
   type: string;
@@ -31,7 +31,10 @@ export const ShopProduct = () => {
 
   return (
     <Wrapper>
-      {product.images && <ProductImages images={product.images} />}
+      <ProductContainer>
+        {product.images && <ProductImages images={product.images} />}
+        <ProductInfo></ProductInfo>
+      </ProductContainer>
     </Wrapper>
   );
 };
