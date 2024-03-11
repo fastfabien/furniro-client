@@ -1,10 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import productService from "./productService";
 
+interface ImageObject {
+  type: string;
+  data: any[]; // Ou tout autre type approprié pour les données d'image
+}
+
 export interface Product {
   name: string;
   description: string;
   price: number;
+  images?: ImageObject[];
 }
 
 export interface PaginationState {
@@ -18,6 +24,7 @@ interface ProductState {
   isLoading: boolean;
   message: any;
   pagination: PaginationState;
+  product: Product;
 }
 
 const initialState: ProductState = {
@@ -26,6 +33,11 @@ const initialState: ProductState = {
   isSuccess: false,
   isLoading: false,
   message: "",
+  product: {
+    name: "",
+    description: "",
+    price: 0,
+  },
   pagination: {
     totalPages: 0,
   },
@@ -53,6 +65,23 @@ export const getProducts = createAsyncThunk(
   async ({ page, limit }: { page: number; limit: number }, thunkAPI) => {
     try {
       return productService.getProducts(page, limit);
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const getProduct = createAsyncThunk(
+  "product/getOne",
+  async (id: string | undefined, thunkAPI) => {
+    try {
+      return productService.getProduct(id);
     } catch (error: any) {
       const message =
         (error.response &&
@@ -103,6 +132,24 @@ export const productSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.products = [];
+      })
+      .addCase(getProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.product = action.payload;
+      })
+      .addCase(getProduct.rejected, (state: ProductState, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.product = {
+          name: "",
+          description: "",
+          price: 0,
+        };
       });
   },
 });

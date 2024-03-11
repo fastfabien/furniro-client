@@ -34,9 +34,9 @@ export const ProductCard = ({
         <TextLight>{short_description}</TextLight>
         <TextBold>$ {price}</TextBold>
       </ProductCardBody>
-      <ProductCardAction>
+      {/* <ProductCardAction>
         <Button primary={false}>Add to cart</Button>
-      </ProductCardAction>
+      </ProductCardAction> */}
     </ProductCardContainer>
   );
 };

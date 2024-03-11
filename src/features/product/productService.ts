@@ -15,7 +15,6 @@ const createProduct = async (product: any) => {
 
 const getProducts = async (page: number, limit: number) => {
   try {
-    console.log("page", page);
     const response = await axios.get(`${API_URL}?page=${page}&limit=${limit}`);
     return response.data;
   } catch (err: any) {
@@ -23,5 +22,14 @@ const getProducts = async (page: number, limit: number) => {
   }
 };
 
-const productService = { createProduct, getProducts };
+const getProduct = async (id: string | undefined) => {
+  try {
+    const response = await axios.get(`${API_URL}${id}`);
+    return response.data;
+  } catch (err: any) {
+    return err.message;
+  }
+};
+
+const productService = { createProduct, getProducts, getProduct };
 export default productService;

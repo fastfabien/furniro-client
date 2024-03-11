@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   H2,
   P,
@@ -38,13 +38,13 @@ export const Products = ({
           {products ? (
             products.map((product: any, item: number) => (
               <ProductCard
+                href={product.id}
                 key={item}
                 src={product.image.data}
                 name={product.name}
                 short_description="mandona"
                 price={product.price}
                 alt={product.name}
-                href={product.href}
               />
             ))
           ) : (

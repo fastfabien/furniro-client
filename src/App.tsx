@@ -3,7 +3,15 @@ import { GlobalStyles, dark } from "./Styles";
 import { ThemeProvider } from "styled-components";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
-import { CreateProduct, Footer, Home, Login, Sample, Shop } from "./pages";
+import {
+  CreateProduct,
+  Footer,
+  Home,
+  Login,
+  Sample,
+  Shop,
+  ShopProduct,
+} from "./pages";
 
 function App() {
   return (
@@ -15,6 +23,7 @@ function App() {
           {/* Client */}
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
+          <Route path="/shop/:id" element={<ShopProduct />} />
           <Route path="/test" element={<Sample />} />
 
           {/* Admin */}

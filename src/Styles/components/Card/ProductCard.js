@@ -9,7 +9,8 @@ export const ProductCardContainer = styled(Link)`
   overflow: hidden;
   width: 19.7916666667vw;
 
-  & div:last-child {
+  ${
+    "" /* & div:last-child {
     padding-left: 0.83333333333vw;
     padding-right: 0.83333333333vw;
     transform: translateX(-1000%);
@@ -17,6 +18,7 @@ export const ProductCardContainer = styled(Link)`
 
   &:hover div:last-child {
     transform: translateX(0);
+  } */
   }
 `;
 
