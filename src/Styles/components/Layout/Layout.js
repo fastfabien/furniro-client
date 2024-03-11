@@ -37,3 +37,32 @@ export const HouseLogo = styled.img`
   width: 5.347222222222222vw;
   height: 5.347222222222222vw;
 `;
+
+export const LayoutFooter = styled.div`
+  padding: 6.944444444444445vw 3.6805555555555554vw;
+  background-color: ${(p) => p.theme.lightPeach};
+  margin-top: 5.902777777777778vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3.8194444444444446vw;
+`;
+
+export const LayoutFooterContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+
+  & svg {
+    width: 4.166666666666667vw;
+    height: 4.5vw;
+  }
+
+  & div:last-child {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+`;

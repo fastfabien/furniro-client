@@ -2,6 +2,7 @@ import React from "react";
 import {
   Btn,
   BtnLink,
+  ButtonPagination,
   InputSubmit,
   SubscribeButton,
 } from "../../Styles/components";
@@ -36,4 +37,32 @@ interface SubmitButtonProps {
 }
 export const SubmitButton = ({ children }: SubmitButtonProps) => {
   return <InputSubmit type="submit" value={children} />;
+};
+
+interface PaginationButtonProps {
+  children: React.ReactNode;
+  isactive: boolean;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  index: number;
+}
+
+export const PaginationButton = ({
+  children,
+  isactive,
+  setCurrentPage,
+  index,
+}: PaginationButtonProps) => {
+  const handleSetCurrentPage = (e: any) => {
+    e.preventDefault();
+    setCurrentPage(index);
+  };
+
+  return (
+    <ButtonPagination
+      isactive={isactive}
+      onClick={(e) => handleSetCurrentPage(e)}
+    >
+      {children}
+    </ButtonPagination>
+  );
 };

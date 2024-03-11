@@ -71,3 +71,12 @@ export const setInputFilesValue = (
   const fileValue = filesNames.join(", ");
   setInputValue(fileValue);
 };
+
+export const getBase64 = (image: any) => {
+  return `data:image/jpg;base64,${btoa(
+    new Uint8Array(image).reduce(
+      (data, byte) => data + String.fromCharCode(byte),
+      ""
+    )
+  )}`;
+};

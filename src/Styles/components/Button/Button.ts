@@ -2,6 +2,11 @@ import styled, { css } from "styled-components";
 import { ButtonProps } from "../../../common";
 import { Link } from "react-router-dom";
 
+interface PaginationButtonProps {
+  children: React.ReactNode;
+  isactive: boolean;
+}
+
 const button = css`
   cursor: pointer;
   font-size: 1.11111111111vw;
@@ -71,5 +76,23 @@ export const InputSubmit = styled.input`
     background-color: ${(p) => p.theme.white};
     color: ${(p) => p.theme.gold};
     border: 1px solid ${(p) => p.theme.gold};
+  }
+`;
+
+export const ButtonPagination = styled.button<PaginationButtonProps>`
+  border: none;
+  background-color: ${(p) => (p.isactive ? p.theme.gold : p.theme.lightPeach)};
+  color: ${(p) => (p.isactive ? p.theme.white : p.theme.black)};
+  font-size: 1.3888888888888888vw;
+  padding: 1.0416666666666667vw 1.8055555555555556vw;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.5s ease, color 0.5s ease;
+
+  &:hover {
+    background-color: ${(p) =>
+      p.isactive ? p.theme.lightPeach : p.theme.gold};
+    color: ${(p) => (p.isactive ? p.theme.black : p.theme.white)};
+    transition: background 0.5s ease, color 0.5s ease;
   }
 `;

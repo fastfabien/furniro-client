@@ -1,32 +1,38 @@
 import React from "react";
-import { H2, ProductsContainer, ProductsContent } from "../../../../Styles";
-import { Button, ProductCard } from "../../../../components";
-import { products } from "../../../../data";
+import { H2, P, ProductsContainer, ProductsContent } from "../../../../Styles";
+import { Button, Loading, ProductCard } from "../../../../components";
+import { Product } from "../../../../features/product/product.slice";
 
-// src: string;
-// name: string;
-// short_description: string;
-// price: string;
-// alt: string;
-// href: string;
+interface ProductProps {
+  isLoading: boolean;
+  products: Product[];
+}
 
-export const Products = () => {
+export const Products = ({ isLoading, products }: ProductProps) => {
   return (
     <ProductsContainer>
       <H2>Our Products</H2>
-      <ProductsContent>
-        {products.map((product, item) => (
-          <ProductCard
-            key={item}
-            src={product.src}
-            name={product.name}
-            short_description={product.short_description}
-            price={product.price}
-            alt={product.name}
-            href={product.href}
-          />
-        ))}
-      </ProductsContent>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ProductsContent>
+          {products ? (
+            products.map((product: any, item: number) => (
+              <ProductCard
+                key={item}
+                src={product.image.data}
+                name={product.name}
+                short_description="mandona"
+                price={product.price}
+                alt={product.name}
+                href={product.href}
+              />
+            ))
+          ) : (
+            <P>No product yet.</P>
+          )}
+        </ProductsContent>
+      )}
       <Button primary={false} href="/shop">
         Show more
       </Button>

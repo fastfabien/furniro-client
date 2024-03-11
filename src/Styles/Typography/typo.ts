@@ -21,6 +21,7 @@ export const H2 = styled.h2`
   font-weight: bold;
   line-height: 120%;
   color: ${(p) => p.theme.black};
+  text-transform: capitalize;
 `;
 
 export const H3 = styled(H2)`

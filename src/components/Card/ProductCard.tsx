@@ -7,6 +7,7 @@ import {
 } from "../../Styles/components/Card";
 import { TextBold, TextLight } from "../../Styles/Typography";
 import { Button } from "../Button";
+import { getBase64 } from "../../common";
 
 interface ProductCardProps {
   src: string;
@@ -27,7 +28,7 @@ export const ProductCard = ({
 }: ProductCardProps) => {
   return (
     <ProductCardContainer to={href}>
-      <ProductCardHeader src={src} alt={alt} />
+      <ProductCardHeader src={getBase64(src)} alt={alt} />
       <ProductCardBody>
         <TextBold>{name}</TextBold>
         <TextLight>{short_description}</TextLight>

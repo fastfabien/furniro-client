@@ -13,5 +13,15 @@ const createProduct = async (product: any) => {
   }
 };
 
-const productService = { createProduct };
+const getProducts = async (page: number, limit: number) => {
+  try {
+    console.log("page", page);
+    const response = await axios.get(`${API_URL}?page=${page}&limit=${limit}`);
+    return response.data;
+  } catch (err: any) {
+    return err.message;
+  }
+};
+
+const productService = { createProduct, getProducts };
 export default productService;
