@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   ErrorMessage,
   InputContainer,
@@ -10,7 +10,6 @@ import {
   InputFile,
   LabelInputfiles,
   InputImageContent,
-  CheckBoxContainer,
   CheckBoxLabel,
   InputHidden,
 } from "../../Styles";

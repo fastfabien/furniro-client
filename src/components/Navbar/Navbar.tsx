@@ -15,8 +15,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
-import { LoginAction } from "../Action";
 import { LogOut } from "../LogOut";
+import { LoginAction } from "../Action";
 
 const Navbar = () => {
   const { user } = useSelector((state: RootState) => state.auth);

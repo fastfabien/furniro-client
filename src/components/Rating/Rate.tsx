@@ -14,8 +14,8 @@ export const Rate = ({ starNumber }: RateProps) => {
   return (
     <RateContainer>
       {loopArray.map((index) => (
-        <RateContent isactive={index <= starNumber}>
-          <FontAwesomeIcon key={index} icon={faStar} />
+        <RateContent key={index} isactive={index <= starNumber}>
+          <FontAwesomeIcon icon={faStar} />
         </RateContent>
       ))}
     </RateContainer>

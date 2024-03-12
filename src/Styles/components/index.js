@@ -6,3 +6,4 @@ export * from "./Products";
 export * from "./Loading";
 export * from "./Rate";
 export * from "./Breadcrumb";
+export * from "./Action";

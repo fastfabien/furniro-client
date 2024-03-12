@@ -7,6 +7,10 @@ interface PaginationButtonProps {
   isactive: boolean;
 }
 
+interface AddToCardProps {
+  type: string;
+}
+
 const button = css`
   cursor: pointer;
   font-size: 1.11111111111vw;
@@ -95,4 +99,33 @@ export const ButtonPagination = styled.button<PaginationButtonProps>`
     color: ${(p) => (p.isactive ? p.theme.black : p.theme.white)};
     transition: background 0.5s ease, color 0.5s ease;
   }
+`;
+
+export const InputNumber = styled.input`
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  -moz-appearance: textfield;
+  width: 1vw;
+  font-size: 1.1111111111111112vw;
+  text-align: center;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+`;
+
+export const AddToCard = styled.button<AddToCardProps>`
+  border: 1px solid ${(p) => p.theme.black};
+  border-radius: 10px;
+  outline: none;
+  padding: 1.1805555555555556vw 3.3333333333333335vw;
+  background-color: ${(p) => p.theme.white};
+  cursor: pointer;
+  font-size: 1.3888888888888888vw;
+  width: fit-content;
+  text-transform: capitalize;
 `;

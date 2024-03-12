@@ -184,10 +184,6 @@ export const TextedLink = styled.span`
   }
 `;
 
-interface CheckBoxProps {
-  isactive: boolean;
-}
-
 export const CheckBoxContainer = styled.div`
   display: flex;
 `;

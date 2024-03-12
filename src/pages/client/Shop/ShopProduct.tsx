@@ -4,8 +4,14 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../../app/store";
 import { useAppDispatch } from "../../../app/hook";
 import { getProduct } from "../../../features/product/product.slice";
-import { reset } from "../../../features/auth/authSlice";
-import { Checkbox, ProductImages, Rate } from "../../../components";
+import {
+  Action,
+  Loading,
+  ProductImages,
+  Rate,
+  ShopButton,
+  SizeSelector,
+} from "../../../components";
 import {
   Form,
   H1,
@@ -13,27 +19,23 @@ import {
   ProductContainer,
   ProductInfo,
   Rating,
-  SizeConteiner,
   TextLight,
   Wrapper,
 } from "../../../Styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
-import SizeSelector from "../../../components/Product/SizeSelector";
 
 interface ImageObject {
   type: string;
-  data: any[]; // Ou tout autre type approprié pour les données d'image
-}
-
-interface ProductImageProps {
-  images: ImageObject[];
+  data: any[];
 }
 
 export const ShopProduct = () => {
-  const { isLoading, product, message } = useSelector(
+  const { isLoading, product } = useSelector(
     (state: RootState) => state.product
   );
+
+  const [hasError, setHasError] = useState<boolean>(true);
 
   const dispatch = useAppDispatch();
   const { id } = useParams();
@@ -42,29 +44,53 @@ export const ShopProduct = () => {
     dispatch(getProduct(id));
   }, [dispatch, id]);
 
+  const handleAddToCard = (e: any) => {
+    e.preventDefault();
+
+    const checkBoxs: any = document.querySelectorAll("input[type='radio']");
+
+    for (let i = 0; i < checkBoxs.length; i++) {
+      if (checkBoxs[i].checked) {
+        setHasError(false);
+      }
+    }
+  };
+
   return (
     <Wrapper>
-      <ProductContainer>
-        {product.images && <ProductImages images={product.images} />}
-        <ProductInfo>
-          <H1>{product.name}</H1>
-          <TextLight>Rs. {product.price}</TextLight>
-          <Rating>
-            <Rate starNumber={3} />
-            <FontAwesomeIcon
-              className="grip-lines"
-              icon={faGripLinesVertical}
-            />
-            <TextLight>5 customer review</TextLight>
-          </Rating>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <ProductContainer>
+          {product.images && <ProductImages images={product.images} />}
+          <ProductInfo>
+            <H1>{product.name}</H1>
+            <TextLight>Rs. {product.price}</TextLight>
+            <Rating>
+              <Rate starNumber={3} />
+              <FontAwesomeIcon
+                className="grip-lines"
+                icon={faGripLinesVertical}
+              />
+              <TextLight>5 customer review</TextLight>
+            </Rating>
 
-          <P>{product.short_description}</P>
-          <Form>
-            <TextLight>Size</TextLight>
-            {product.size && <SizeSelector product={product.size[0]} />}
-          </Form>
-        </ProductInfo>
-      </ProductContainer>
+            <P>{product.short_description}</P>
+            <Form onSubmit={(e) => handleAddToCard(e)}>
+              {product.size && (
+                <SizeSelector product={product.size[0]} isError={hasError} />
+              )}
+              {product.images && (
+                <Action
+                  image={product.images[0]}
+                  name={product.name}
+                  price={product.price}
+                />
+              )}
+            </Form>
+          </ProductInfo>
+        </ProductContainer>
+      )}
     </Wrapper>
   );
 };
