@@ -16,17 +16,12 @@ interface ProductImageProps {
   images: ImageObject[];
 }
 
-export const ProductImages = React.memo(({ images }: ProductImageProps) => {
+export const ProductImages = ({ images }: ProductImageProps) => {
   const [currentActive, setCurrentActive] = useState<string>(
     getBase64(images[0].data)
   );
 
-  useEffect(() => {
-    // Préchargement des images
-    images.forEach((image) => {
-      new Image().src = getBase64(image.data);
-    });
-  }, [images]);
+  useEffect(() => {}, [currentActive]);
 
   const handleSetActive = (e: any, image: string) => {
     e.preventDefault();
@@ -42,11 +37,11 @@ export const ProductImages = React.memo(({ images }: ProductImageProps) => {
             src={getBase64(image.data)}
             alt="Product image"
             isactive={getBase64(image.data) === currentActive}
-            onMouseDown={(e) => handleSetActive(e, getBase64(image.data))}
+            onClick={(e) => handleSetActive(e, getBase64(image.data))}
           />
         ))}
       </AllImagesContainer>
       <CurrentImages src={currentActive} alt="Product image" />
     </ProductImagesContainer>
   );
-});
+};

@@ -11,6 +11,8 @@ export interface Product {
   description: string;
   price: number;
   images?: ImageObject[];
+  short_description?: string;
+  size?: any;
 }
 
 export interface PaginationState {

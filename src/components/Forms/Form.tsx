@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   ErrorMessage,
   InputContainer,
@@ -10,6 +10,9 @@ import {
   InputFile,
   LabelInputfiles,
   InputImageContent,
+  CheckBoxContainer,
+  CheckBoxLabel,
+  InputHidden,
 } from "../../Styles";
 import {
   FormProps,
@@ -123,5 +126,43 @@ export const InputFiles = ({ label, name }: InputFilesProps) => {
       />
       <InputImageContent id="form-image-content"></InputImageContent>
     </InputFilesContainer>
+  );
+};
+
+export interface CheckBoxProps {
+  name: string;
+  value: string;
+  isActive: boolean;
+  setIsActive: React.Dispatch<any>;
+}
+
+export const Checkbox = ({
+  name,
+  value,
+  isActive,
+  setIsActive,
+}: CheckBoxProps) => {
+  const id = `checkbox-${name}-${value}`;
+
+  useEffect(() => {}, [isActive]);
+
+  const handleCurrentActive = (e: any) => {
+    setIsActive(e.target);
+  };
+
+  return (
+    <>
+      <InputHidden
+        type="radio"
+        id={id}
+        name={name}
+        value={value}
+        checked={isActive}
+        onChange={(e) => handleCurrentActive(e)}
+      />
+      <CheckBoxLabel isactive={isActive} htmlFor={id}>
+        {value}
+      </CheckBoxLabel>
+    </>
   );
 };

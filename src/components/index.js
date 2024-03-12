@@ -7,3 +7,4 @@ export * from "./Layout";
 export * from "./BreadCrumbs";
 export * from "./Product";
 export * from "./Loading";
+export * from "./Rating";

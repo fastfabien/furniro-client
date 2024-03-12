@@ -183,3 +183,33 @@ export const TextedLink = styled.span`
     text-decoration: underline;
   }
 `;
+
+interface CheckBoxProps {
+  isactive: boolean;
+}
+
+export const CheckBoxContainer = styled.div`
+  display: flex;
+`;
+
+export interface CheckBoxLabelProps {
+  isactive: boolean;
+}
+
+export const CheckBoxLabel = styled(Label)<CheckBoxLabelProps>`
+  background-color: ${(p) => (p.isactive ? p.theme.gold : p.theme.lightPeach)};
+  color: ${(p) => (p.isactive ? p.theme.white : p.theme.black)};
+  padding: 5px 8px;
+  font-size: 13px;
+  font-weight: 400;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  min-width: 2.0833333333333335vw;
+  height: 2.0833333333333335vw;
+  text-align: center;
+`;
+
+export const InputHidden = styled.input`
+  display: none;
+`;

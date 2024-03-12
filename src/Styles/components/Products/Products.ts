@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { H1, P, TextBold, TextLight } from "../../Typography";
+import { Form } from "../Forms";
 
 interface ImageProps {
   src: any;
@@ -65,4 +67,38 @@ export const ProductContainer = styled.div`
   gap: 7.291666666666667vw;
 `;
 
-export const ProductInfo = styled.div``;
+export const ProductInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & ${H1} {
+    color: ${(p) => p.theme.black};
+    font-weight: 400;
+    font-size: 2.9166666666666665vw;
+  }
+
+  & ${TextLight} {
+    font-size: 1.6666666666666667vw;
+  }
+
+  & ${P} {
+    font-size: 0.9027777777777778vw;
+    width: 29.444444444444443vw;
+    font-weight: 500;
+    line-height: 1.4em;
+    margin-top: 1.25vw;
+    margin-bottom: 1.5277777777777777vw;
+
+    & + form > span {
+      font-size: 14px;
+    }
+  }
+`;
+
+export const SizeConteiner = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 16px;
+  margin-top: 12px;
+`;
