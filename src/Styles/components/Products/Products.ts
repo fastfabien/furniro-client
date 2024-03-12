@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { H1, P, TextBold, TextLight } from "../../Typography";
 import { Form } from "../Forms";
+import { Text } from "../../Pages";
 
 interface ImageProps {
   src: any;
@@ -71,6 +72,10 @@ export const ProductInfo = styled.div`
   display: flex;
   flex-direction: column;
 
+  & form {
+    margin-bottom: 4.166666666666667vw;
+  }
+
   & ${H1} {
     color: ${(p) => p.theme.black};
     font-weight: 400;
@@ -101,4 +106,19 @@ export const SizeConteiner = styled.div`
   justify-content: flex-start;
   gap: 16px;
   margin-top: 12px;
+`;
+
+export const DescriptionText = styled(Text)<{ active: boolean }>`
+  color: ${(p) => (p.active ? p.theme.black : p.theme.pureGray)};
+  font-weight: ${(p) => (p.active ? "800" : "400")};
+  cursor: pointer;
+`;
+
+export const DescriptionSize = styled.div`
+  padding: inherit 3vw;
+`;
+
+export const TextSize = styled(TextBold)`
+  color: ${(p) => p.theme.gold};
+  text-transform: uppercase;
 `;

@@ -7,6 +7,7 @@ interface ImageObject {
 }
 
 export interface Product {
+  sku: string;
   name: string;
   description: string;
   price: number;
@@ -39,6 +40,7 @@ const initialState: ProductState = {
     name: "",
     description: "",
     price: 0,
+    sku: "",
   },
   pagination: {
     totalPages: 0,
@@ -151,6 +153,7 @@ export const productSlice = createSlice({
           name: "",
           description: "",
           price: 0,
+          sku: "",
         };
       });
   },

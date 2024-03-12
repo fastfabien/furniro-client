@@ -107,7 +107,7 @@ export const InputNumber = styled.input`
   background-color: transparent;
   outline: none;
   -moz-appearance: textfield;
-  width: 1vw;
+  max-width: 2vw;
   font-size: 1.1111111111111112vw;
   text-align: center;
 
