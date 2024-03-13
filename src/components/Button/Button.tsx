@@ -8,15 +8,15 @@ import {
 } from "../../Styles/components";
 import { ButtonProps } from "../../common";
 
-export const Button = ({ href, primary = true, children }: ButtonProps) => {
+export const Button = ({ href, primary = "true", children }: ButtonProps) => {
   return (
     <>
       {href ? (
-        <BtnLink primary={primary} to={href}>
+        <BtnLink data-testid="btn-link" primary={primary} to={href}>
           {children}
         </BtnLink>
       ) : (
-        <Btn primary={primary} href={href}>
+        <Btn primary={primary} data-testid="btn">
           {children}
         </Btn>
       )}
@@ -29,19 +29,21 @@ interface SubscribeButtonProps {
 }
 
 export const ButtonSubscribe = ({ children }: SubscribeButtonProps) => {
-  return <SubscribeButton type="submit" value={children} />;
+  return (
+    <SubscribeButton data-testid="subscribe" type="submit" value={children} />
+  );
 };
 
 interface SubmitButtonProps {
   children: string;
 }
 export const SubmitButton = ({ children }: SubmitButtonProps) => {
-  return <InputSubmit type="submit" value={children} />;
+  return <InputSubmit data-testid="submit" type="submit" value={children} />;
 };
 
 interface PaginationButtonProps {
   children: React.ReactNode;
-  isactive: boolean;
+  isactive: string;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   index: number;
 }

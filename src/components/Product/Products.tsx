@@ -56,7 +56,7 @@ export const Products = ({
         <PaginationContainer>
           {currentPage > 1 && (
             <PaginationButton
-              isactive={false}
+              isactive="false"
               index={currentPage - 1}
               setCurrentPage={setCurrentPage}
             >
@@ -66,7 +66,7 @@ export const Products = ({
           {Array.from({ length: pagination.totalPages }, (_, index) => (
             <PaginationButton
               key={index + 1}
-              isactive={index + 1 === currentPage}
+              isactive={String(index + 1 === currentPage)}
               index={index + 1}
               setCurrentPage={setCurrentPage}
             >
@@ -76,7 +76,7 @@ export const Products = ({
           {currentPage < pagination.totalPages && (
             <>
               <PaginationButton
-                isactive={false}
+                isactive="false"
                 index={currentPage + 1}
                 setCurrentPage={setCurrentPage}
               >

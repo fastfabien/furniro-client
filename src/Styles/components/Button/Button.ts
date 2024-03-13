@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 interface PaginationButtonProps {
   children: React.ReactNode;
-  isactive: boolean;
+  isactive: string;
 }
 
 interface AddToCardProps {
@@ -27,31 +27,37 @@ const button = css`
 `;
 
 export const Btn = styled.button<ButtonProps>`
-  border: 1px solid ${(p) => (p.primary ? "transparent" : p.theme.gold)};
-  background-color: ${(p) => (p.primary ? p.theme.gold : p.theme.white)};
-  color: ${(p) => (p.primary ? p.theme.white : p.theme.gold)};
+  border: 1px solid
+    ${(p) => (p.primary === "true" ? "transparent" : p.theme.gold)};
+  background-color: ${(p) =>
+    p.primary === "true" ? p.theme.gold : p.theme.white};
+  color: ${(p) => (p.primary === "true" ? p.theme.white : p.theme.gold)};
 
   ${button}
 
   &:hover {
-    background-color: ${(p) => (p.primary ? p.theme.white : p.theme.gold)};
-    color: ${(p) => (p.primary ? p.theme.gold : p.theme.white)};
+    background-color: ${(p) =>
+      p.primary === "true" ? p.theme.white : p.theme.gold};
+    color: ${(p) => (p.primary === "true" ? p.theme.gold : p.theme.white)};
     border: 1px solid ${(p) => p.theme.gold};
   }
 `;
 
 export const BtnLink = styled(Link)<ButtonProps>`
-  border: 1px solid ${(p) => (p.primary ? "transparent" : p.theme.gold)};
-  background-color: ${(p) => (p.primary ? p.theme.gold : p.theme.white)};
-  color: ${(p) => (p.primary ? p.theme.white : p.theme.gold)};
+  border: 1px solid
+    ${(p) => (p.primary === "true" ? "transparent" : p.theme.gold)};
+  background-color: ${(p) =>
+    p.primary === "true" ? p.theme.gold : p.theme.white};
+  color: ${(p) => (p.primary === "true" ? p.theme.white : p.theme.gold)};
 
   ${button}
 
   display: inline-block;
 
   &:hover {
-    background-color: ${(p) => (p.primary ? p.theme.white : p.theme.gold)};
-    color: ${(p) => (p.primary ? p.theme.gold : p.theme.white)};
+    background-color: ${(p) =>
+      p.primary === "true" ? p.theme.white : p.theme.gold};
+    color: ${(p) => (p.primary === "true" ? p.theme.gold : p.theme.white)};
     border: 1px solid ${(p) => p.theme.gold};
   }
 `;
@@ -85,8 +91,9 @@ export const InputSubmit = styled.input`
 
 export const ButtonPagination = styled.button<PaginationButtonProps>`
   border: none;
-  background-color: ${(p) => (p.isactive ? p.theme.gold : p.theme.lightPeach)};
-  color: ${(p) => (p.isactive ? p.theme.white : p.theme.black)};
+  background-color: ${(p) =>
+    p.isactive === "true" ? p.theme.gold : p.theme.lightPeach};
+  color: ${(p) => (p.isactive === "true" ? p.theme.white : p.theme.black)};
   font-size: 1.3888888888888888vw;
   padding: 1.0416666666666667vw 1.8055555555555556vw;
   border-radius: 10px;
@@ -96,7 +103,7 @@ export const ButtonPagination = styled.button<PaginationButtonProps>`
   &:hover {
     background-color: ${(p) =>
       p.isactive ? p.theme.lightPeach : p.theme.gold};
-    color: ${(p) => (p.isactive ? p.theme.black : p.theme.white)};
+    color: ${(p) => (p.isactive === "true" ? p.theme.black : p.theme.white)};
     transition: background 0.5s ease, color 0.5s ease;
   }
 `;

@@ -33,7 +33,7 @@ export const Products = ({ isLoading, products }: ProductProps) => {
           )}
         </ProductsContent>
       )}
-      <Button primary={false} href="/shop">
+      <Button primary="false" href="/shop">
         Show more
       </Button>
     </ProductsContainer>

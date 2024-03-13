@@ -12,7 +12,7 @@ interface LoginActionProps {
 export const LoginAction = ({ showLogin, setShowLogin }: LoginActionProps) => {
   return (
     <>
-      <NavText onClick={() => setShowLogin(!showLogin)}>
+      <NavText data-testid="nav-text" onClick={() => setShowLogin(!showLogin)}>
         <FontAwesomeIcon icon={faUser} />
       </NavText>
       {showLogin && (

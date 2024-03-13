@@ -5,8 +5,8 @@ import { LoadingContainer } from "../../Styles";
 
 export const Loading = () => {
   return (
-    <LoadingContainer>
-      <FontAwesomeIcon icon={faSpinner} />
+    <LoadingContainer data-testid="loading-container">
+      <FontAwesomeIcon data-testid="loading-icon" icon={faSpinner} />
     </LoadingContainer>
   );
 };
