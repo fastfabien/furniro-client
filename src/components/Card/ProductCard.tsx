@@ -1,12 +1,10 @@
 import React from "react";
 import {
-  ProductCardAction,
   ProductCardBody,
   ProductCardContainer,
   ProductCardHeader,
 } from "../../Styles/components/Card";
 import { TextBold, TextLight } from "../../Styles/Typography";
-import { Button } from "../Button";
 import { getBase64 } from "../../common";
 
 interface ProductCardProps {

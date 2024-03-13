@@ -19,8 +19,6 @@ export const Shop = () => {
     dispatch(getProducts({ page: currentPage, limit: 8 }));
   }, [dispatch, currentPage]);
 
-  console.log(pagination);
-
   return (
     <PageLayout pageName="shop">
       <Wrapper>
