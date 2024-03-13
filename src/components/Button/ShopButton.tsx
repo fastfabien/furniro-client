@@ -23,19 +23,23 @@ export const ShopButton = ({ type, children }: ShopButtonProps) => {
   return (
     <>
       {type === "number" ? (
-        <ActionInput>
+        <ActionInput data-testid="action-input">
           <FontAwesomeIcon
+            data-testid="minus"
             icon={faMinus}
             onClick={() => handleChangeInputValue("-")}
           />
           <InputNumber type={type} value={inputValue} readOnly />
           <FontAwesomeIcon
+            data-testid="plus"
             icon={faPlus}
             onClick={() => handleChangeInputValue("+")}
           />
         </ActionInput>
       ) : (
-        <AddToCard type={type}>{children}</AddToCard>
+        <AddToCard data-testid="add-to-cart" type={type}>
+          {children}
+        </AddToCard>
       )}
     </>
   );
