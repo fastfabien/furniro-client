@@ -25,7 +25,7 @@ export const ProductCard = ({
   href,
 }: ProductCardProps) => {
   return (
-    <ProductCardContainer to={href}>
+    <ProductCardContainer to={"/shop/" + href}>
       <ProductCardHeader src={getBase64(src)} alt={alt} />
       <ProductCardBody>
         <TextBold>{name}</TextBold>
