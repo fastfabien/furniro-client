@@ -136,3 +136,21 @@ export const AddToCard = styled.button<AddToCardProps>`
   width: fit-content;
   text-transform: capitalize;
 `;
+
+export const CartButtonContainer = styled(Link)`
+  border: 1px solid ${(p) => p.theme.black};
+  border-radius: 3.4722222222222223vw;
+  background-color: ${(p) => p.theme.white};
+  padding: 6px 2.0833333333333335vw;
+  font-size: 0.8333333333333334vw;
+  font-weight: 400;
+  width: fit-content;
+  text-transform: capitalize;
+  color: ${(p) => p.theme.black};
+  outline: none;
+
+  &:hover {
+    background-color: ${(p) => p.theme.black};
+    color: ${(p) => p.theme.white};
+  }
+`;

@@ -17,6 +17,7 @@ import { RootState } from "../../app/store";
 import { useSelector } from "react-redux";
 import { LogOut } from "../LogOut";
 import { LoginAction } from "../Action";
+import { CartItems } from "../Cart";
 
 const Navbar = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -45,9 +46,7 @@ const Navbar = () => {
         <LinkText to="/">
           <FontAwesomeIcon icon={faHeart} />
         </LinkText>
-        <LinkText to="/cart">
-          <FontAwesomeIcon icon={faCartShopping} />
-        </LinkText>
+        <CartItems />
         {user && <LogOut />}
       </NavbarAction>
     </NavbarContainer>

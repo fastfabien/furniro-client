@@ -61,6 +61,19 @@ export const LinkText = styled(Link)`
   }
 `;
 
+export const NoLinkText = styled.span`
+  font-size: 1.11111111111vw;
+  font-weight: 500;
+  line-height: auto;
+  color: ${(p) => p.theme.black};
+  cursor: pointer;
+  font-size: 1.5vw;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export const NavText = styled.span`
   font-size: 1.5vw;
   font-weight: 500;

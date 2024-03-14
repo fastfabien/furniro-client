@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { P } from "../../Typography";
 import { Text } from "../../Pages";
 
+interface HrProps {
+  width?: string;
+}
+
 export const ActionContainer = styled.div`
   display: flex;
   flex-direction: row;
@@ -29,8 +33,8 @@ export const ActionInput = styled.div`
   }
 `;
 
-export const Hr = styled.div`
-  width: 100%;
+export const Hr = styled.div<HrProps>`
+  width: ${(p) => (p.width ? p.width : "100")}%;
   height: 1px;
   background-color: ${(p) => p.theme.pureGray};
 `;

@@ -3,6 +3,7 @@ import {
   Btn,
   BtnLink,
   ButtonPagination,
+  CartButtonContainer,
   InputSubmit,
   SubscribeButton,
 } from "../../Styles/components";
@@ -67,4 +68,13 @@ export const PaginationButton = ({
       {children}
     </ButtonPagination>
   );
+};
+
+interface CartButtonProps {
+  href: string;
+  children: React.ReactNode;
+}
+
+export const CartButton = ({ href, children }: CartButtonProps) => {
+  return <CartButtonContainer to={href}>{children}</CartButtonContainer>;
 };
