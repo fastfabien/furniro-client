@@ -4,6 +4,7 @@ import {
   CartContent,
   CartItem,
   CartItemFooter,
+  CartItemFooterContainer,
   CartItemHeader,
   CartItemImage,
   CartItemProduct,
@@ -22,19 +23,32 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faXmark } from "@fortawesome/free-solid-svg-icons";
 import img from "../../assets/image/bedroom.png";
 import { CartButton } from "../Button";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { useAppDispatch } from "../../app/hook";
+import { getUserCart } from "../../features/cart/cart.slice";
+import { Loading } from "../Loading";
+import { setToLocalString } from "../../common";
 
 export const CartItems = () => {
   const [showCartItems, setShowCartItems] = useState<boolean>(false);
+  const { cart, isLoading, isError } = useSelector(
+    (state: RootState) => state.cart
+  );
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(getUserCart());
     return () => {
       setShowCartItems(false);
     };
-  }, [setShowCartItems]);
+  }, [setShowCartItems, dispatch]);
 
   const handleShowCartItems = () => {
     setShowCartItems(!showCartItems);
   };
+
   return (
     <>
       {showCartItems ? (
@@ -48,47 +62,48 @@ export const CartItems = () => {
               />
             </CartItemHeader>
             <Hr width="80" />
-            <CartItemsContent>
-              <CartItem>
-                <CartItemImage src={img} alt="Product image" />
-                <CartItemProduct>
-                  <P>Asgaard sofa</P>
-                  <P>
-                    <Quantity>1</Quantity>
-                    <TextLight>X</TextLight>
-                    <Price>Rs. 250,000.00</Price>
-                  </P>
-                </CartItemProduct>
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  onClick={() => handleShowCartItems()}
-                />
-              </CartItem>
-              <CartItem>
-                <CartItemImage src={img} alt="Product image" />
-                <CartItemProduct>
-                  <P>Asgaard sofa</P>
-                  <P>
-                    <Quantity>1</Quantity>
-                    <TextLight>X</TextLight>
-                    <Price>Rs. 250,000.00</Price>
-                  </P>
-                </CartItemProduct>
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  onClick={() => handleShowCartItems()}
-                />
-              </CartItem>
-            </CartItemsContent>
-            <Total>
-              <Text>Subtotal</Text>
-              <Price>Rs. 250,000.00</Price>
-            </Total>
-            <Hr />
-            <CartItemFooter>
-              <CartButton href="/shop/cart">cart</CartButton>
-              <CartButton href="/shop/checkout">checkout</CartButton>
-            </CartItemFooter>
+            {isLoading ? (
+              <Loading />
+            ) : (
+              <CartItemsContent>
+                {cart && cart.items ? (
+                  cart.items.map((item, index) => (
+                    <CartItem key={index}>
+                      <CartItemImage src={img} alt="Product image" />
+                      <CartItemProduct>
+                        <P>{item.product.name}</P>
+                        <P>
+                          <Quantity>{item.quantity}</Quantity>
+                          <TextLight>X</TextLight>
+                          <Price>
+                            Rs. {setToLocalString(item.product.price, "fr-FR")}
+                          </Price>
+                        </P>
+                      </CartItemProduct>
+                      <FontAwesomeIcon
+                        icon={faXmark}
+                        onClick={() => handleShowCartItems()}
+                      />
+                    </CartItem>
+                  ))
+                ) : (
+                  <P>Your cart is void.</P>
+                )}
+              </CartItemsContent>
+            )}
+            <CartItemFooterContainer>
+              {cart && cart.items && (
+                <Total>
+                  <Text>Subtotal</Text>
+                  <Price>Rs. {setToLocalString(cart.total, "fr-FR")}</Price>
+                </Total>
+              )}
+              <Hr />
+              <CartItemFooter>
+                <CartButton href="/shop/cart">cart</CartButton>
+                <CartButton href="/shop/checkout">checkout</CartButton>
+              </CartItemFooter>
+            </CartItemFooterContainer>
           </CartContent>
         </CartContainer>
       ) : (

@@ -3,7 +3,11 @@ import { CartForm, CartState } from "../../common";
 import cartService from "./cartService";
 
 const initialState: CartState = {
-  cart: { user: "", items: [{ product: "", quantity: 0 }] },
+  cart: {
+    user: "",
+    items: [{ product: { name: "", couverture: "", price: 0 }, quantity: 0 }],
+    total: 0,
+  },
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -27,6 +31,18 @@ export const addToCart = createAsyncThunk(
   }
 );
 
+export const getUserCart = createAsyncThunk("cart/get", async (_, thunkAPI) => {
+  try {
+    return cartService.getUserCart();
+  } catch (error: any) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -47,7 +63,33 @@ export const cartSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.cart = { user: "", items: [{ product: "", quantity: 0 }] };
+        state.cart = {
+          user: "",
+          items: [
+            { product: { name: "", couverture: "", price: 0 }, quantity: 0 },
+          ],
+          total: 0,
+        };
+      })
+      .addCase(getUserCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUserCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.cart = action.payload;
+      })
+      .addCase(getUserCart.rejected, (state: CartState, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.cart = {
+          user: "",
+          items: [
+            { product: { name: "", couverture: "", price: 0 }, quantity: 0 },
+          ],
+          total: 0,
+        };
       });
   },
 });

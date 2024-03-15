@@ -5,7 +5,7 @@ import {
   ProductCardHeader,
 } from "../../Styles/components/Card";
 import { TextBold, TextLight } from "../../Styles/Typography";
-import { getBase64 } from "../../common";
+import { getBase64, setToLocalString } from "../../common";
 
 interface ProductCardProps {
   src: string;
@@ -30,7 +30,7 @@ export const ProductCard = ({
       <ProductCardBody>
         <TextBold>{name}</TextBold>
         <TextLight>{short_description}</TextLight>
-        <TextBold>$ {price}</TextBold>
+        <TextBold>$ {setToLocalString(Number(price), "fr-FR")}</TextBold>
       </ProductCardBody>
       {/* <ProductCardAction>
         <Button primary={false}>Add to cart</Button>

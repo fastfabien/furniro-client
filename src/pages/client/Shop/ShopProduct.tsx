@@ -27,7 +27,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 import { Hr, More, MoreContent } from "../../../Styles/components/Action";
 import { Description } from "../../../components/Product/Description";
-import { CartForm } from "../../../common";
+import { CartForm, setToLocalString } from "../../../common";
 import { addToCart } from "../../../features/cart/cart.slice";
 
 interface ImageObject {
@@ -83,7 +83,6 @@ export const ShopProduct = () => {
     }
 
     dispatch(addToCart(cartValue));
-    console.log(cart);
   };
 
   return (
@@ -96,7 +95,9 @@ export const ShopProduct = () => {
             {product.images && <ProductImages images={product.images} />}
             <ProductInfo>
               <H1>{product.name}</H1>
-              <TextLight>Rs. {product.price}</TextLight>
+              <TextLight>
+                Rs. {setToLocalString(product.price, "fr-FR")}
+              </TextLight>
               <Rating>
                 <Rate starNumber={3} />
                 <TextLight className="grip-lines">|</TextLight>

@@ -13,15 +13,17 @@ export const CartContainer = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   z-index: 20;
+  overscroll-behavior: contain;
 `;
 
 export const CartContent = styled.div`
   padding: 1.9444444444444444vw;
   width: 28.958333333333332vw;
   background-color: ${(p) => p.theme.white};
-  height: 51.80555555555556vw;
+  height: 47.80555555555556vw;
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 export const CartItemHeader = styled.div`
@@ -55,7 +57,15 @@ export const CartItemsContent = styled.div`
   flex-direction: column;
   padding: 2.9166666666666665vw 0;
   gap: 1.3888888888888888vw;
-  height: 63%;
+  height: 68%;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 `;
 
 export const CartItem = styled.div`
@@ -69,6 +79,10 @@ export const CartItemProduct = styled.div`
   flex-direction: column;
   gap: 8px;
   margin-right: 4.166666666666667vw;
+
+  & p:first-child {
+    text-transform: capitalize;
+  }
 
   & + svg {
     color: ${(p) => p.theme.white};
@@ -142,4 +156,9 @@ export const CartItemFooter = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   gap: 14px;
+`;
+
+export const CartItemFooterContainer = styled.div`
+  position: absolute;
+  bottom: 0;
 `;

@@ -2,8 +2,6 @@ import axios from "axios";
 import { CartForm } from "../../common";
 import authHeader from "../auth.header";
 
-const user: string | null = localStorage.getItem("user");
-
 const API_URL = "/api/cart/";
 
 const addToCart = async (product: CartForm) => {
@@ -17,5 +15,14 @@ const addToCart = async (product: CartForm) => {
   }
 };
 
-const cartService = { addToCart };
+const getUserCart = async () => {
+  try {
+    const response = await axios.get(API_URL, { headers: authHeader() });
+    return response.data;
+  } catch (err: any) {
+    return err.message;
+  }
+};
+
+const cartService = { addToCart, getUserCart };
 export default cartService;

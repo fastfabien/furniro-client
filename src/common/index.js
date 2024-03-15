@@ -7,3 +7,4 @@ export * from "./BreadCrumb";
 export * from "./Image";
 export * from "./User";
 export * from "./Cart";
+export * from "./Number";
