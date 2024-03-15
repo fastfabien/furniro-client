@@ -19,7 +19,7 @@ export const NavbarLogo = styled(Link)`
   background-image: url(${Logo});
   background-position: center center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: contain;
   margin-right: 18.4722222222vw;
 `;
 

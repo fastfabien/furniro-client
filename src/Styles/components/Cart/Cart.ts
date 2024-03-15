@@ -12,6 +12,7 @@ export const CartContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
+  z-index: 20;
 `;
 
 export const CartContent = styled.div`

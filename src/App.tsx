@@ -4,6 +4,8 @@ import { ThemeProvider } from "styled-components";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import {
+  Cart,
+  Checkout,
   CreateProduct,
   Footer,
   Home,
@@ -24,6 +26,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/shop/:id" element={<ShopProduct />} />
+          <Route path="/shop/cart" element={<Cart />} />
+          <Route path="/shop/checkout" element={<Checkout />} />
           <Route path="/test" element={<Sample />} />
 
           {/* Admin */}

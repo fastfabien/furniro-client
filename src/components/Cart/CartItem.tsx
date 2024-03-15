@@ -26,7 +26,11 @@ import { CartButton } from "../Button";
 export const CartItems = () => {
   const [showCartItems, setShowCartItems] = useState<boolean>(false);
 
-  useEffect(() => {}, [setShowCartItems]);
+  useEffect(() => {
+    return () => {
+      setShowCartItems(false);
+    };
+  }, [setShowCartItems]);
 
   const handleShowCartItems = () => {
     setShowCartItems(!showCartItems);

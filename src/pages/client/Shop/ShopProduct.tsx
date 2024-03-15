@@ -13,6 +13,7 @@ import {
   SizeSelector,
 } from "../../../components";
 import {
+  CartItem,
   Form,
   H1,
   P,
@@ -26,6 +27,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 import { Hr, More, MoreContent } from "../../../Styles/components/Action";
 import { Description } from "../../../components/Product/Description";
+import { CartForm } from "../../../common";
+import { addToCart } from "../../../features/cart/cart.slice";
 
 interface ImageObject {
   type: string;
@@ -37,6 +40,10 @@ export const ShopProduct = () => {
     (state: RootState) => state.product
   );
 
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  const { cart } = useSelector((state: RootState) => state.cart);
+
   const [hasError, setHasError] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -44,20 +51,39 @@ export const ShopProduct = () => {
 
   useEffect(() => {
     dispatch(getProduct(id));
-  }, [dispatch, id]);
+  }, [dispatch, id, cart]);
 
   const handleAddToCard = (e: any) => {
     e.preventDefault();
 
-    const checkBoxs: any = document.querySelectorAll("input[type='radio']");
+    const formData = e.target;
 
-    for (let i = 0; i < checkBoxs.length; i++) {
-      if (checkBoxs[i].checked) {
-        setHasError(false);
-      } else {
-        setHasError(true);
+    let cartValue;
+
+    if (product._id) {
+      cartValue = {
+        size: "",
+        quantity: 0,
+        product_id: product._id,
+      };
+    } else {
+      cartValue = {
+        size: "",
+        quantity: 0,
+        product_id: "",
+      };
+    }
+
+    for (let i = 0; i < formData.length; i++) {
+      if (formData[i].checked) {
+        cartValue.size = formData[i].value;
+      } else if (formData[i].type === "number") {
+        cartValue.quantity = formData[i].value;
       }
     }
+
+    dispatch(addToCart(cartValue));
+    console.log(cart);
   };
 
   return (

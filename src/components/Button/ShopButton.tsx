@@ -29,7 +29,12 @@ export const ShopButton = ({ type, children }: ShopButtonProps) => {
             icon={faMinus}
             onClick={() => handleChangeInputValue("-")}
           />
-          <InputNumber type={type} value={inputValue} readOnly />
+          <InputNumber
+            type={type}
+            value={inputValue}
+            name="quantity"
+            readOnly
+          />
           <FontAwesomeIcon
             data-testid="plus"
             icon={faPlus}

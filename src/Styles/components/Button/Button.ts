@@ -102,7 +102,7 @@ export const ButtonPagination = styled.button<PaginationButtonProps>`
 
   &:hover {
     background-color: ${(p) =>
-      p.isactive ? p.theme.lightPeach : p.theme.gold};
+      p.isactive === "true" ? p.theme.lightPeach : p.theme.gold};
     color: ${(p) => (p.isactive === "true" ? p.theme.black : p.theme.white)};
     transition: background 0.5s ease, color 0.5s ease;
   }
