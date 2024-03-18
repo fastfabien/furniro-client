@@ -135,6 +135,14 @@ export const AddToCard = styled.button<AddToCardProps>`
   font-size: 1.3888888888888888vw;
   width: fit-content;
   text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  & div {
+    padding: 0;
+    font-size: 1.3888888888888888vw;
+  }
 `;
 
 export const CartButtonContainer = styled(Link)`

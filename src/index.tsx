@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import store from "./app/store";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:4000";
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_BASE_URL; //https://furniro-server-eight.vercel.app/
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement

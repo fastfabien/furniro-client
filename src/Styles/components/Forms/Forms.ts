@@ -1,4 +1,16 @@
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
+
+const showError = keyframes`
+
+  from {
+    transform: translateX(100%);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+
+`;
 
 export const FormContainer = styled.div`
   display: flex;
@@ -19,6 +31,24 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: start;
+`;
+
+export const SuccessMessage = styled.div`
+  position: fixed;
+  top: 8vw;
+  right: 0;
+  padding: 1.1805555555555556vw 3.3333333333333335vw;
+  background-color: ${(p) => p.theme.gold};
+  color: ${(p) => p.theme.white};
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+
+  animation: ${showError} 1s ease;
+
+  & a {
+    font-weight: 800;
+    text-decoration: underline;
+  }
 `;
 
 const inputValue = css`

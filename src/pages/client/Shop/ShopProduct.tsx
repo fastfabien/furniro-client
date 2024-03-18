@@ -4,17 +4,8 @@ import { useParams } from "react-router-dom";
 import { RootState } from "../../../app/store";
 import { useAppDispatch } from "../../../app/hook";
 import { getProduct } from "../../../features/product/product.slice";
+import { AddToCart, Loading, ProductImages, Rate } from "../../../components";
 import {
-  Action,
-  Loading,
-  ProductImages,
-  Rate,
-  ShopButton,
-  SizeSelector,
-} from "../../../components";
-import {
-  CartItem,
-  Form,
   H1,
   P,
   ProductContainer,
@@ -23,67 +14,21 @@ import {
   TextLight,
   Wrapper,
 } from "../../../Styles";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 import { Hr, More, MoreContent } from "../../../Styles/components/Action";
 import { Description } from "../../../components/Product/Description";
-import { CartForm, setToLocalString } from "../../../common";
-import { addToCart } from "../../../features/cart/cart.slice";
-
-interface ImageObject {
-  type: string;
-  data: any[];
-}
+import { setToLocalString } from "../../../common";
 
 export const ShopProduct = () => {
   const { isLoading, product } = useSelector(
     (state: RootState) => state.product
   );
 
-  const { user } = useSelector((state: RootState) => state.auth);
-
-  const { cart } = useSelector((state: RootState) => state.cart);
-
-  const [hasError, setHasError] = useState<boolean>(false);
-
   const dispatch = useAppDispatch();
   const { id } = useParams();
 
   useEffect(() => {
     dispatch(getProduct(id));
-  }, [dispatch, id, cart]);
-
-  const handleAddToCard = (e: any) => {
-    e.preventDefault();
-
-    const formData = e.target;
-
-    let cartValue;
-
-    if (product._id) {
-      cartValue = {
-        size: "",
-        quantity: 0,
-        product_id: product._id,
-      };
-    } else {
-      cartValue = {
-        size: "",
-        quantity: 0,
-        product_id: "",
-      };
-    }
-
-    for (let i = 0; i < formData.length; i++) {
-      if (formData[i].checked) {
-        cartValue.size = formData[i].value;
-      } else if (formData[i].type === "number") {
-        cartValue.quantity = formData[i].value;
-      }
-    }
-
-    dispatch(addToCart(cartValue));
-  };
+  }, [dispatch, id]);
 
   return (
     <Wrapper>
@@ -105,18 +50,7 @@ export const ShopProduct = () => {
               </Rating>
 
               <P>{product.short_description}</P>
-              <Form onSubmit={(e) => handleAddToCard(e)}>
-                {product.size && (
-                  <SizeSelector product={product.size[0]} isError={hasError} />
-                )}
-                {product.images && (
-                  <Action
-                    image={product.images[0]}
-                    name={product.name}
-                    price={product.price}
-                  />
-                )}
-              </Form>
+              <AddToCart product={product} />
               <Hr />
               <More>
                 <MoreContent>

@@ -24,5 +24,16 @@ const getUserCart = async () => {
   }
 };
 
-const cartService = { addToCart, getUserCart };
+const removeUserCart = async (id: string) => {
+  try {
+    const response = await axios.post(API_URL + `remove/${id}`, {
+      headers: authHeader(),
+    });
+    return response.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
+
+const cartService = { addToCart, getUserCart, removeUserCart };
 export default cartService;

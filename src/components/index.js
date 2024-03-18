@@ -9,3 +9,4 @@ export * from "./Product";
 export * from "./Loading";
 export * from "./Rating";
 export * from "./Cart";
+export * from "./PopupMessage";

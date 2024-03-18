@@ -26,7 +26,7 @@ import { CartButton } from "../Button";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { useAppDispatch } from "../../app/hook";
-import { getUserCart } from "../../features/cart/cart.slice";
+import { getUserCart, removeUserCart } from "../../features/cart/cart.slice";
 import { Loading } from "../Loading";
 import { setToLocalString } from "../../common";
 
@@ -47,6 +47,10 @@ export const CartItems = () => {
 
   const handleShowCartItems = () => {
     setShowCartItems(!showCartItems);
+  };
+
+  const handleRemoveFromCart = (id: string) => {
+    dispatch(removeUserCart(id));
   };
 
   return (
@@ -82,7 +86,7 @@ export const CartItems = () => {
                       </CartItemProduct>
                       <FontAwesomeIcon
                         icon={faXmark}
-                        onClick={() => handleShowCartItems()}
+                        onClick={() => handleRemoveFromCart(item.product._id)}
                       />
                     </CartItem>
                   ))

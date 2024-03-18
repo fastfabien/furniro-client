@@ -1,4 +1,5 @@
 export interface ProductCartItems {
+  _id: string;
   name: string;
   couverture: any;
   price: number;
