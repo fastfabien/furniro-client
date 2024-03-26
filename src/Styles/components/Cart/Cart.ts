@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { H2 } from "../../Typography";
+import { CartButtonContainer } from "../Button";
 
 export const CartContainer = styled.div`
   background-color: rgba(${(p) => p.theme.dimgrayRgba}, 0.4);
@@ -161,4 +163,108 @@ export const CartItemFooter = styled.div`
 export const CartItemFooterContainer = styled.div`
   position: absolute;
   bottom: 0;
+`;
+
+export const CartPageContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2.0833333333333335vw;
+`;
+
+export const CartTotalContainer = styled.div`
+  padding: 1.8vw 5.208333333333333vw 5.555555555555555vw 5.208333333333333vw;
+  background-color: ${(p) => p.theme.lightPeach};
+  width: 27.291666666666668vw;
+  height: 27.291666666666668vw;
+
+  & ${H2} {
+    margin-bottom: 4.166666666666667vw;
+    text-align: center;
+  }
+
+  & ${CartButtonContainer} {
+    border-radius: 1.0416666666666667vw;
+    padding: 14px 4.166666666666667vw;
+    font-size: 1.3888888888888888vw;
+    margin-top: 3.8194444444444446vw;
+    display: block;
+  }
+`;
+
+export const CartTotalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.0833333333333335vw;
+
+  & p {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 1.1111111111111112vw;
+  }
+
+  & p:first-child span {
+    font-size: 1.1111111111111112vw;
+  }
+
+  & p:last-child span {
+    color: ${(p) => p.theme.gold};
+  }
+`;
+
+export const CartTableContainer = styled.table`
+  width: 56.736111111111114vw;
+  border-collapse: separate;
+  border-spacing: 0;
+`;
+
+export const CartTableTrHead = styled.tr`
+  background-color: ${(p) => p.theme.lightPeach};
+  height: 3.8194444444444446vw;
+  border-collapse: collapse;
+
+  & th,
+  & td {
+    padding: 0;
+    text-transform: capitalize;
+  }
+`;
+
+export const CartTableRowContainer = styled.tr`
+  & td {
+    text-align: center;
+    width: fit-content;
+    padding: 0;
+    text-transform: capitalize;
+
+    &:first-child {
+      display: block;
+      margin-top: 20px;
+    }
+
+    &:last-child {
+      widht: 2.4305555555555554vw;
+    }
+
+    & svg {
+      color: ${(p) => p.theme.gold};
+    }
+
+    & img {
+      width: 7.291666666666667vw;
+      height: 7.291666666666667vw;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+`;
+
+export const CartTableQuantity = styled.div`
+  border-radius: 5px;
+  border: 1px solid ${(p) => p.theme.blackLight};
+  font-size: 1.1111111111111112vw;
+  padding: 4px auto;
+  width: 2.2222222222222223vw;
+  margin: 0 auto;
+  text-align: center;
 `;
