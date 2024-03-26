@@ -1,15 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import type { RootState } from "../../app/store";
 import authService from "./authService";
 
-interface User {
+export interface User {
   _id: string;
   name: string;
   email: string;
   token: string;
 }
 
-type ParsedLocalStorageValue = User | null;
+export type ParsedLocalStorageValue = User | null;
 
 interface UserState {
   user: User | null;

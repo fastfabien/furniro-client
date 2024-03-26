@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import productService from "./productService";
 
-interface ImageObject {
+export interface ImageObject {
   type: string;
   data: any[]; // Ou tout autre type approprié pour les données d'image
 }
@@ -13,6 +13,7 @@ export interface Product {
   description: string;
   price: number;
   images?: ImageObject[];
+  image?: ImageObject;
   short_description?: string;
   size?: any;
 }

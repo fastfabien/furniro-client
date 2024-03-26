@@ -12,14 +12,25 @@ import {
   InputImageContent,
   CheckBoxLabel,
   InputHidden,
+  InputSearchContainer,
+  SearchInput,
+  P,
 } from "../../Styles";
 import {
   FormProps,
   SubscribeFormProps,
   addImageToContainer,
+  getBase64,
   handleInputChange,
   setInputFilesValue,
 } from "../../common";
+import productService from "../../features/product/productService";
+import {
+  SearchContainer,
+  SearchResult,
+  SearchResultContent,
+} from "../../Styles/components/Search";
+import { Product } from "../../features/product/product.slice";
 
 export const Input = ({
   type,
@@ -163,5 +174,52 @@ export const Checkbox = ({
         {value}
       </CheckBoxLabel>
     </>
+  );
+};
+
+interface InputSearchProps {}
+
+export const InputSearch = () => {
+  const [value, setValue] = useState<string>("");
+  const [products, setProducts] = useState<Product[]>();
+  const [error, setError] = useState();
+
+  useEffect(() => {
+    console.log(products);
+  }, [setValue, products]);
+
+  const handleSearchProduct = async (e: any) => {
+    setValue(e.target.value);
+    console.log(value);
+    try {
+      if (value !== "") {
+        const response = await productService.searchProduct(value);
+        setProducts(response);
+      }
+    } catch (err: any) {
+      setError(err.message);
+    }
+  };
+
+  return (
+    <InputSearchContainer>
+      <SearchInput
+        type="text"
+        value={value}
+        onChange={(e) => handleSearchProduct(e)}
+      />
+      {products ? (
+        <SearchResult>
+          {products.map((product: Product, index: number) => (
+            <SearchResultContent key={index} to={`/shop/${product._id}`}>
+              <img src={getBase64(product.image?.data)} alt={product.name} />
+              <P>{product.name}</P>
+            </SearchResultContent>
+          ))}
+        </SearchResult>
+      ) : (
+        "mandona"
+      )}
+    </InputSearchContainer>
   );
 };

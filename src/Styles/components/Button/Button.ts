@@ -73,6 +73,12 @@ export const SubscribeButton = styled.input`
   padding-bottom: 5px;
   border-bottom: 2px solid ${(p) => p.theme.black};
   margin-bottom: 0 !important;
+  transition: border 0.1s ease;
+
+  &:hover {
+    border-bottom-width: thick;
+    transition: border 0.1s ease;
+  }
 `;
 
 export const InputSubmit = styled.input`

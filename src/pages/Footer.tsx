@@ -50,7 +50,7 @@ export const Footer = () => {
         </FooterLinkContainer>
       </FooterContainer>
       <FooterCopyright>
-        <p>2023 furino. All rights reverved</p>
+        <p>2023 furniro. All rights reverved</p>
       </FooterCopyright>
     </Footers>
   );

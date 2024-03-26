@@ -7,6 +7,7 @@ import { addToCart } from "../../features/cart/cart.slice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { PopupMessage } from "../PopupMessage";
+import { CartForm } from "../../common";
 
 interface AddToCartProps {
   product: Product;
@@ -26,9 +27,9 @@ export const AddToCart = ({ product }: AddToCartProps) => {
 
     const formData = e.target;
 
-    let cartValue;
+    let cartValue: CartForm;
 
-    if (product._id) {
+    if (product._id && product.images) {
       cartValue = {
         size: "",
         quantity: 0,

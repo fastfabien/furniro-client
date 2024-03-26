@@ -8,3 +8,4 @@ export * from "./Rate";
 export * from "./Breadcrumb";
 export * from "./Action";
 export * from "./Cart";
+export * from "./Search";

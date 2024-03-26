@@ -128,6 +128,10 @@ export const SubscribeContainer = styled.form`
   display: flex;
   flex-direction: row;
   gap: 11px;
+
+  & ${InputContainer} {
+    margin-bottom: 0 !important;
+  }
 `;
 
 export const InputFilesContainer = styled.div`
@@ -238,4 +242,21 @@ export const CheckBoxLabel = styled(Label)<CheckBoxLabelProps>`
 
 export const InputHidden = styled.input`
   display: none;
+`;
+
+export const InputSearchContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
+
+export const SearchInput = styled.input`
+  background-color: unset;
+  color: ${(p) => p.theme.white};
+  outline: none;
+  border: none;
+  border-bottom: 2px solid ${(p) => p.theme.white};
+  padding: 2vw 1vw 0.5vw 0;
+  font-size: 2vw;
+  text-align: center;
 `;

@@ -1,7 +1,9 @@
+import { ImageObject } from "../features/product/product.slice";
+
 export interface ProductCartItems {
   _id: string;
   name: string;
-  couverture: any;
+  couverture: ImageObject;
   price: number;
 }
 
@@ -23,7 +25,7 @@ export interface CartForm {
 }
 
 export interface CartState {
-  cart: Cart;
+  cart: Cart | null;
   isError: boolean;
   isSuccess: boolean;
   isLoading: boolean;

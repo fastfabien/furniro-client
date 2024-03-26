@@ -1,15 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { CartForm, CartState } from "../../common";
+import { Cart, CartForm, CartState } from "../../common";
 import cartService from "./cartService";
 
+type ParsedLocalStorageValue = Cart | null;
+
+const localCartUser: string | null = localStorage.getItem("cart");
+
+const localcart: ParsedLocalStorageValue = localCartUser
+  ? JSON.parse(localCartUser)
+  : null;
+
 const initialState: CartState = {
-  cart: {
-    user: "",
-    items: [
-      { product: { _id: "", name: "", couverture: "", price: 0 }, quantity: 0 },
-    ],
-    total: 0,
-  },
+  cart: localcart,
   isError: false,
   isSuccess: false,
   isLoading: false,

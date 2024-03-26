@@ -31,5 +31,19 @@ const getProduct = async (id: string | undefined) => {
   }
 };
 
-const productService = { createProduct, getProducts, getProduct };
+const searchProduct = async (name: string) => {
+  try {
+    const response = await axios.get(`${API_URL}?name=${name}`);
+    return response.data;
+  } catch (err: any) {
+    return err.message;
+  }
+};
+
+const productService = {
+  createProduct,
+  getProducts,
+  getProduct,
+  searchProduct,
+};
 export default productService;

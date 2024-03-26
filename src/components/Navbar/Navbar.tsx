@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import { LogOut } from "../LogOut";
 import { LoginAction } from "../Action";
 import { CartItems } from "../Cart";
+import { Search } from "../Search";
 
 const Navbar = () => {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -40,9 +41,7 @@ const Navbar = () => {
         ) : (
           <LoginAction showLogin={showLogin} setShowLogin={setShowLogin} />
         )}
-        <LinkText to="/">
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </LinkText>
+        <Search />
         <LinkText to="/">
           <FontAwesomeIcon icon={faHeart} />
         </LinkText>

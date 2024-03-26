@@ -25,7 +25,7 @@ export const Products = ({ isLoading, products }: ProductProps) => {
                 short_description="mandona"
                 price={product.price}
                 alt={product.name}
-                href={product.id}
+                href={product._id}
               />
             ))
           ) : (

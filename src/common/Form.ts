@@ -15,7 +15,7 @@ export type FormProps = {
 };
 
 export type SubscribeFormProps = {
-  label: string;
+  label?: string;
 };
 
 function isValidEmail(email: string): boolean {

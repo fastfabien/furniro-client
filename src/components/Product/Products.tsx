@@ -38,7 +38,7 @@ export const Products = ({
           {products ? (
             products.map((product: any, item: number) => (
               <ProductCard
-                href={product.id}
+                href={product._id}
                 key={item}
                 src={product.image.data}
                 name={product.name}

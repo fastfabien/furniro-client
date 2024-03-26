@@ -18,7 +18,10 @@ const login = async (userData) => {
   return response.data;
 };
 
-const signOut = async () => localStorage.removeItem("user");
+const signOut = async () => {
+  localStorage.removeItem("user");
+  localStorage.removeItem("cart");
+};
 
 const authService = { register, login, signOut };
 export default authService;
