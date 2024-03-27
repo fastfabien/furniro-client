@@ -260,3 +260,154 @@ export const SearchInput = styled.input`
   font-size: 2vw;
   text-align: center;
 `;
+
+export const InputSelectContainer = styled.select<{ icon: any }>`
+  ${inputValue};
+  appearance: none;
+  position: relative;
+
+  background-image: url(${(p) => p.icon});
+  background-repeat: no-repeat;
+  background-position: right 1.875vw center;
+  background-size: 1.3888888888888888vw;
+  text-transform: capitalize;
+
+  & option {
+    color: ${(p) => p.theme.white};
+    background-color: ${(p) => p.theme.gold};
+    text-transform: capitalize;
+  }
+`;
+
+export const BillingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 42.22222222222222vw;
+  gap: 2.5vw;
+  padding: 2.4305555555555554vw 3.138888888888889vw;
+`;
+
+export const BillingForm = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  & input {
+    width: 100%;
+  }
+`;
+
+export const UserName = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 2.0833333333333335vw;
+`;
+
+export const FormRow = styled.form`
+  display: flex;
+  flex-direction: row;
+  gap: 4.444444444444445vw;
+`;
+
+export const BillingDetailsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 6.041666666666667vw 2.638888888888889vw;
+  width: 42.22222222222222vw;
+`;
+
+export const BillingDetailsHeader = styled.table`
+  border-collapse: separate;
+  border-spacing: 10px;
+
+  & th {
+    text-align: left;
+    text-transform: capitalize;
+    font-size: 1.6666666666666667vw;
+    font-weight: 500;
+
+    &:last-child {
+      text-align: right;
+    }
+  }
+
+  & td {
+    font-size: 0.8333333333333334vw;
+    & span {
+      text-transform: capitalize;
+      font-size: 1.1111111111111112vw;
+    }
+  }
+
+  & td:last-child {
+    font-size: 1.1111111111111112vw;
+    text-align: right;
+    font-weight: bold;
+    & div {
+      justify-content: flex-end;
+    }
+  }
+`;
+
+export const TdContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const TdTotal = styled.td`
+  font-size: 1.1111111111111112vw !important;
+`;
+
+export const TdTotalValue = styled.td`
+  font-size: 1.6666666666666667vw !important;
+  font-weight: bold;
+  color: ${(p) => p.theme.gold};
+`;
+
+export const BillingBody = styled.div`
+  margin-top: 2.7777777777777777vw;
+  padding-top: 1.5625vw;
+  border-top: 2px solid ${(p) => p.theme.pureGray};
+  display: flex;
+  flex-direction: column;
+  gap: 1.7361111111111112vw;
+`;
+
+export const BillingPaymentContainer = styled.div<{ isActive: boolean }>`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+
+  & label {
+    margin-bottom: unset;
+    font-size: 1.1111111111111112vw;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    position: relative;
+    padding-left: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      border: 1px solid ${(p) => p.theme.black};
+      background-color: ${(p) => (p.isActive ? p.theme.black : p.theme.white)};
+      display: block;
+    }
+  }
+`;
+
+export const PaymentDescription = styled.p`
+  font-weight: 100;
+  font-size: 1vw;
+  color: ${(p) => p.theme.lightGray};
+  width: 36.666666666666664vw;
+`;

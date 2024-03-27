@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { CartTableContainer, CartTableTrHead } from "../../Styles";
+import { CartTableContainer, CartTableTrHead, P } from "../../Styles";
 import { CartTableRow } from "./CartTableRow";
 import { CartItems } from "../../common";
 
@@ -21,17 +21,19 @@ export const CartTable = ({ items }: CartTableProps) => {
         <th>subtotal</th>
         <th></th>
       </CartTableTrHead>
-      {items
-        ? items.map((item, index) => (
-            <CartTableRow
-              key={index}
-              couverture={item.product.couverture}
-              name={item.product.name}
-              price={item.product.price}
-              quantity={item.quantity}
-            />
-          ))
-        : "Your cart is void."}
+      {items ? (
+        items.map((item, index) => (
+          <CartTableRow
+            key={index}
+            couverture={item.product.couverture}
+            name={item.product.name}
+            price={item.product.price}
+            quantity={item.quantity}
+          />
+        ))
+      ) : (
+        <P>Your cart is void.</P>
+      )}
     </CartTableContainer>
   );
 };

@@ -168,3 +168,30 @@ export const CartButtonContainer = styled(Link)`
     color: ${(p) => p.theme.white};
   }
 `;
+
+export const ButtonPayment = styled.button`
+  border: 1px solid ${(p) => p.theme.black};
+  border-radius: 1.0416666666666667vw;
+  background-color: ${(p) => p.theme.white};
+  padding: 1.1805555555555556vw 7.083333333333333vw;
+  font-size: 1.3888888888888888vw;
+  font-weight: 400;
+  width: fit-content;
+  text-transform: capitalize;
+  color: ${(p) => p.theme.black};
+  outline: none;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  margin-top: 2.7777777777777777vw;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    background-color: ${(p) => p.theme.black};
+    color: ${(p) => p.theme.white};
+  }
+`;

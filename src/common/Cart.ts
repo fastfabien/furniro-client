@@ -13,6 +13,7 @@ export interface CartItems {
 }
 
 export interface Cart {
+  _id?: string;
   user?: string;
   items: [CartItems];
   total: number;
@@ -30,4 +31,11 @@ export interface CartState {
   isSuccess: boolean;
   isLoading: boolean;
   message: any;
+}
+
+export interface Order {
+  billingAddress: number | any[];
+  total: number;
+  product: string;
+  cartId: string;
 }

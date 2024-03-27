@@ -243,7 +243,7 @@ export const CartTableRowContainer = styled.tr`
     }
 
     &:last-child {
-      widht: 2.4305555555555554vw;
+      width: 4.4305555555555554vw;
     }
 
     & svg {
@@ -263,8 +263,13 @@ export const CartTableQuantity = styled.div`
   border-radius: 5px;
   border: 1px solid ${(p) => p.theme.blackLight};
   font-size: 1.1111111111111112vw;
-  padding: 4px auto;
+  padding: 10px auto;
   width: 2.2222222222222223vw;
+  height: 2.2222222222222223vw;
   margin: 0 auto;
   text-align: center;
+  font-weight: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

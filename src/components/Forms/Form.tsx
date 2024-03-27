@@ -15,6 +15,7 @@ import {
   InputSearchContainer,
   SearchInput,
   P,
+  InputSelectContainer,
 } from "../../Styles";
 import {
   FormProps,
@@ -31,6 +32,9 @@ import {
   SearchResultContent,
 } from "../../Styles/components/Search";
 import { Product } from "../../features/product/product.slice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import iconImage from "../../assets/image/arrow-down.png";
 
 export const Input = ({
   type,
@@ -221,5 +225,37 @@ export const InputSearch = () => {
         "mandona"
       )}
     </InputSearchContainer>
+  );
+};
+
+interface SelectItems {
+  name: string;
+  value: string;
+}
+
+interface InputSelectProps {
+  label: any;
+  items: SelectItems[];
+  name: string;
+}
+
+export const InputSelect = ({ label, items, name }: InputSelectProps) => {
+  const [value, setValue] = useState<string>();
+  return (
+    <InputContainer>
+      <Label>{label}</Label>
+      <InputSelectContainer
+        icon={iconImage}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        name={name}
+      >
+        {items.map((item, index) => (
+          <option key={index} value={item.value}>
+            {item.name}
+          </option>
+        ))}
+      </InputSelectContainer>
+    </InputContainer>
   );
 };
