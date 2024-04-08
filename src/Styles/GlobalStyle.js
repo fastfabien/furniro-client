@@ -29,10 +29,6 @@ const GlobalStyles = createGlobalStyle`
         color: inherit;
         text-decoration: none;
     }
-
-    .swiper-button-prev, .swiper-button-next {
-        visibility: hidden;
-    }
 `;
 
 export { GlobalStyles };

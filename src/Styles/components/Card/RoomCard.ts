@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+// "28.0555555556vw" : "25.8333333333vw"
+
 export const RoomCardContainer = styled.div<{
   img: string;
   isactive: boolean;
 }>`
-  width: ${(p) => (p.isactive ? "28.0555555556vw" : "25.8333333333vw")};
+  width: ${(p) => (p.isactive ? "100%" : "100%")};
   height: ${(p) => (p.isactive ? "40.4166666667vw" : "33.75vw")};
   position: relative;
   padding-left: 1.66666666667vw;
