@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
 import { useAppDispatch } from "../../../app/hook";
@@ -8,9 +8,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const PaymentValidation = () => {
   const dispatch = useAppDispatch();
-  const { cart, isLoading, isError } = useSelector(
-    (state: RootState) => state.cart
-  );
+  const [alreadyRendered, setAlreadyRendered] = useState<boolean>(false);
+
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const address = searchParams.get("address");
@@ -18,11 +17,12 @@ export const PaymentValidation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id && address) {
+    if (id && address && !alreadyRendered) {
       dispatch(validateStripePayment({ cartId: id, billingAddress: address }));
+      setAlreadyRendered(true);
       navigate("/thank-you");
     }
-  }, [dispatch, id, address, navigate]);
+  }, [dispatch, id, address, navigate, alreadyRendered]);
 
   return <Loading />;
 };
