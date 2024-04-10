@@ -14,6 +14,7 @@ import {
   Sample,
   Shop,
   ShopProduct,
+  ThankYou,
 } from "./pages";
 
 function App() {
@@ -31,6 +32,8 @@ function App() {
           <Route path="/shop/checkout" element={<Checkout />} />
           <Route path="/test" element={<Sample />} />
           <Route path="/success" element={<PaymentValidation />} />
+          <Route path="/cancel" element={<PaymentValidation />} />
+          <Route path="/thank-you" element={<ThankYou />} />
 
           {/* Admin */}
           <Route path="/admin/products/new" element={<CreateProduct />} />
