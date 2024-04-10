@@ -5,6 +5,8 @@ const API_URL = "/api/create-checkout-session/";
 const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 const ORDER_URL = "/api/order/";
 
+console.log(PUBLISHABLE_KEY);
+
 const stripePayment = async (order: PayOrder) => {
   const stripe = await loadStripe(PUBLISHABLE_KEY);
 
