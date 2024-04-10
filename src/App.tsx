@@ -10,6 +10,7 @@ import {
   Footer,
   Home,
   Login,
+  PaymentValidation,
   Sample,
   Shop,
   ShopProduct,
@@ -29,6 +30,7 @@ function App() {
           <Route path="/shop/cart" element={<Cart />} />
           <Route path="/shop/checkout" element={<Checkout />} />
           <Route path="/test" element={<Sample />} />
+          <Route path="/success" element={<PaymentValidation />} />
 
           {/* Admin */}
           <Route path="/admin/products/new" element={<CreateProduct />} />

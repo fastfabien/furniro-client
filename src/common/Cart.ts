@@ -45,3 +45,8 @@ export interface PayOrder {
   total: number;
   cartId: string;
 }
+
+export interface OrderValidation {
+  cartId: string;
+  billingAddress: string;
+}

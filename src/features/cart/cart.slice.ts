@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Cart, CartForm, CartState } from "../../common";
+import { Cart, CartForm, CartState, OrderValidation } from "../../common";
 import cartService from "./cartService";
+import { validatePayment } from "../payment/payment";
 
 type ParsedLocalStorageValue = Cart | null;
 
@@ -23,6 +24,23 @@ export const addToCart = createAsyncThunk(
   async (cart: CartForm, thunkAPI) => {
     try {
       return cartService.addToCart(cart);
+    } catch (error: any) {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+export const validateStripePayment = createAsyncThunk(
+  "cart/paymentValidation",
+  async (order: OrderValidation, thunkAPI) => {
+    try {
+      return validatePayment(order);
     } catch (error: any) {
       const message =
         (error.response &&
@@ -107,6 +125,19 @@ export const cartSlice = createSlice({
         state.cart = action.payload;
       })
       .addCase(removeUserCart.rejected, (state: CartState, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(validateStripePayment.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(validateStripePayment.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.cart = null;
+      })
+      .addCase(validateStripePayment.rejected, (state: CartState, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

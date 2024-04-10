@@ -1,8 +1,9 @@
 import { loadStripe } from "@stripe/stripe-js";
-import { Cart, Order, PayOrder } from "../../common";
+import { Cart, Order, OrderValidation, PayOrder } from "../../common";
 import axios from "axios";
 const API_URL = "/api/create-checkout-session/";
 const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
+const ORDER_URL = "/api/order/";
 
 const stripePayment = async (order: PayOrder) => {
   const stripe = await loadStripe(PUBLISHABLE_KEY);
@@ -23,11 +24,14 @@ const stripePayment = async (order: PayOrder) => {
   } catch (error: any) {}
 };
 
-export { stripePayment };
+const validatePayment = async (order: OrderValidation) => {
+  try {
+    const response = await axios.post(ORDER_URL, order);
+    localStorage.setItem("cart", JSON.stringify(response.data));
+    return response.data;
+  } catch (error: any) {
+    return error.message;
+  }
+};
 
-/*
-
-order: billingAddress, cart, total, orderName
-
-
-*/
+export { stripePayment, validatePayment };
