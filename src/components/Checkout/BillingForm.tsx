@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { FormRow } from "../../Styles";
 import { BillingAddress } from "./BillingAddress";
-import { Cart, Order } from "../../common";
+import { Address, Cart, Order, PayOrder } from "../../common";
 import { BillingDetails } from "./BillingDetails";
 import { stripePayment } from "../../features/payment/payment";
+import { createBillingAdress } from "../../features/billingAdress/billingAdress";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 
 interface BillingFormProps {
   cart: Cart;
@@ -11,24 +14,42 @@ interface BillingFormProps {
 
 export const BillingForm = ({ cart }: BillingFormProps) => {
   const [currentActive, setCurrentActive] = useState<HTMLInputElement>();
+  const { user } = useSelector((state: RootState) => state.auth);
 
   useEffect(() => {}, [cart, currentActive]);
 
   const handlePlacePayment = async (e: any) => {
     e.preventDefault();
     const form = e.target;
-    let formData: any[] = [];
+    let formData: Address = {
+      first_name: "",
+      last_name: "",
+      region: "",
+      street: "",
+      city: "",
+      province: "",
+      zip_code: "",
+      phone: "",
+      email: "",
+    };
+
+    if (user) {
+      formData["user"] = user._id;
+    }
+
     for (let i = 0; i < form.length; i++) {
       const element = form[i];
-      formData.push({
-        [element.name]: element.value,
-      });
+      if (element.name in formData) {
+        formData[element.name as keyof Address] = element.value;
+      }
     }
-    const order: Order = {
-      billingAddress: formData,
+
+    const billingAdress = await createBillingAdress(formData);
+
+    const order: PayOrder = {
+      billingAddress: billingAdress,
       total: cart.total,
-      product: "Order mandona",
-      cartId: "mandona",
+      cartId: String(cart._id),
     };
 
     if (currentActive?.name === "stripe") {

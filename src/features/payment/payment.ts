@@ -1,10 +1,10 @@
 import { loadStripe } from "@stripe/stripe-js";
-import { Cart, Order } from "../../common";
+import { Cart, Order, PayOrder } from "../../common";
 import axios from "axios";
-const API_URL = "/api/create-checkout-session";
+const API_URL = "/api/create-checkout-session/";
 const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;
 
-const stripePayment = async (order: Order) => {
+const stripePayment = async (order: PayOrder) => {
   const stripe = await loadStripe(PUBLISHABLE_KEY);
 
   try {

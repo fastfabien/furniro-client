@@ -39,3 +39,9 @@ export interface Order {
   product: string;
   cartId: string;
 }
+
+export interface PayOrder {
+  billingAddress: any;
+  total: number;
+  cartId: string;
+}
