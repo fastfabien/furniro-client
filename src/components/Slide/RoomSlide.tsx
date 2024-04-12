@@ -13,7 +13,7 @@ export const RoomSlide = () => {
     <Swiper
       modules={[Navigation, Pagination]}
       spaceBetween={24}
-      slidesPerView={2.15}
+      slidesPerView={2.3}
       navigation
       pagination={{ clickable: true }}
       loop={true}

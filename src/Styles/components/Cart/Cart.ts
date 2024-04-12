@@ -231,11 +231,13 @@ export const CartTableTrHead = styled.tr`
 `;
 
 export const CartTableRowContainer = styled.tr`
+  height: fit-content;
   & td {
     text-align: center;
     width: fit-content;
     padding: 0;
     text-transform: capitalize;
+    height: fit-content;
 
     &:first-child {
       display: block;
