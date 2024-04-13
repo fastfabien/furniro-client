@@ -1,3 +1,6 @@
+import axios from "axios";
+const API_URL = "/api/variants/";
+
 export const addImageToContainer = (
   container: HTMLElement,
   url: string,
@@ -79,4 +82,32 @@ export const getBase64 = (image: any) => {
       ""
     )
   )}`;
+};
+
+export const getVariantCouverture = async (name: string) => {
+  const URL = API_URL + name;
+  try {
+    const response = await axios.get(URL);
+    return response.data.data; // Retourne data.data.data directement
+  } catch (error: any) {
+    return error.message; // Retourne le message d'erreur en cas d'erreur
+  }
+};
+
+export const handleGetVariantCouverture = async (name: string) => {
+  const image = await getVariantCouverture(name);
+  const image64 = getBase64(image);
+  return image64;
+};
+
+export const getImageSrc = async (
+  setImage: React.Dispatch<React.SetStateAction<string>>,
+  name: string
+) => {
+  try {
+    const base64Image = await handleGetVariantCouverture(name);
+    setImage(base64Image);
+  } catch (error: any) {
+    return error.message;
+  }
 };

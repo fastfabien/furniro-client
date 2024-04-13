@@ -1,31 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   CartTableQuantity,
   CartTableRowContainer,
   TextLight,
 } from "../../Styles";
-import { getBase64, setToLocalString } from "../../common";
+import { getImageSrc, setToLocalString } from "../../common";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { ImageObject } from "../../features/product/product.slice";
 
 interface CartTableRowProps {
-  couverture: any;
   name: string;
   price: number;
   quantity: number;
 }
 
-export const CartTableRow = ({
-  couverture,
-  name,
-  price,
-  quantity,
-}: CartTableRowProps) => {
+export const CartTableRow = ({ name, price, quantity }: CartTableRowProps) => {
+  const [imageSrc, setImageSrc] = useState<string>("");
+
+  useEffect(() => {
+    getImageSrc(setImageSrc, name);
+  }, [name, price, quantity]);
+
   return (
     <CartTableRowContainer>
       <td>
-        <img alt="product thumbs" src={getBase64(couverture.data)} />
+        <img alt="product thumbs" src={imageSrc} />
       </td>
       <td>
         <TextLight>{name}</TextLight>

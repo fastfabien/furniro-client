@@ -28,7 +28,8 @@ import { RootState } from "../../app/store";
 import { useAppDispatch } from "../../app/hook";
 import { getUserCart, removeUserCart } from "../../features/cart/cart.slice";
 import { Loading } from "../Loading";
-import { getBase64, setToLocalString } from "../../common";
+import { setToLocalString } from "../../common";
+import { CartItemImages } from "./CartItemImage";
 
 export const CartItems = () => {
   const [showCartItems, setShowCartItems] = useState<boolean>(false);
@@ -73,7 +74,7 @@ export const CartItems = () => {
                 {cart && cart.items ? (
                   cart.items.map((item, index) => (
                     <CartItem key={index}>
-                      <CartItemImage src={img} alt="Product image" />
+                      <CartItemImages name={item.product.name} />
                       <CartItemProduct>
                         <P>{item.product.name}</P>
                         <P>

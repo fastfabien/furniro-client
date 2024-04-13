@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Cart, CartForm, CartItems } from "../../common";
+import { Cart, CartForm, CartItems, getVariantCouverture } from "../../common";
 import authHeader from "../auth.header";
 import { User } from "../auth/authSlice";
 

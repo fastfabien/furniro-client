@@ -26,7 +26,6 @@ export const CartTable = ({ items }: CartTableProps) => {
         items.map((item, index) => (
           <CartTableRow
             key={index}
-            couverture={img}
             name={item.product.name}
             price={item.product.price}
             quantity={item.quantity}
