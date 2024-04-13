@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { CartTableContainer, CartTableTrHead, P } from "../../Styles";
 import { CartTableRow } from "./CartTableRow";
 import { CartItems } from "../../common";
+import img from "../../assets/image/bedroom.png";
 
 interface CartTableProps {
   items: CartItems[];
@@ -25,7 +26,7 @@ export const CartTable = ({ items }: CartTableProps) => {
         items.map((item, index) => (
           <CartTableRow
             key={index}
-            couverture={item.product.couverture}
+            couverture={img}
             name={item.product.name}
             price={item.product.price}
             quantity={item.quantity}

@@ -10,7 +10,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { ImageObject } from "../../features/product/product.slice";
 
 interface CartTableRowProps {
-  couverture: ImageObject;
+  couverture: any;
   name: string;
   price: number;
   quantity: number;

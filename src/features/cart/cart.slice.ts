@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Cart, CartForm, CartState, OrderValidation } from "../../common";
+import {
+  Cart,
+  CartForm,
+  CartItems,
+  CartState,
+  OrderValidation,
+} from "../../common";
 import cartService from "./cartService";
 import { validatePayment } from "../payment/payment";
 
@@ -21,7 +27,7 @@ const initialState: CartState = {
 
 export const addToCart = createAsyncThunk(
   "cart/add",
-  async (cart: CartForm, thunkAPI) => {
+  async (cart: CartForm | CartItems, thunkAPI) => {
     try {
       return cartService.addToCart(cart);
     } catch (error: any) {

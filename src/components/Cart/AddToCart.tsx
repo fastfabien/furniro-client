@@ -7,13 +7,14 @@ import { addToCart } from "../../features/cart/cart.slice";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import { PopupMessage } from "../PopupMessage";
-import { CartForm } from "../../common";
+import { CartForm, CartItems } from "../../common";
 
 interface AddToCartProps {
   product: Product;
 }
 
 export const AddToCart = ({ product }: AddToCartProps) => {
+  const { user } = useSelector((state: RootState) => state.auth);
   const { isLoading, isSuccess } = useSelector(
     (state: RootState) => state.cart
   );
@@ -27,27 +28,37 @@ export const AddToCart = ({ product }: AddToCartProps) => {
 
     const formData = e.target;
 
-    let cartValue: CartForm;
+    let cartValue: CartForm | CartItems;
 
-    if (product._id && product.images) {
+    if (user) {
       cartValue = {
         size: "",
         quantity: 0,
-        product_id: product._id,
+        product_id: product._id || "",
       };
     } else {
       cartValue = {
-        size: "",
+        product: {
+          name: product.name + " " + formData[0].value,
+          price: product.price,
+        },
         quantity: 0,
-        product_id: "",
       };
     }
 
     for (let i = 0; i < formData.length; i++) {
-      if (formData[i].checked) {
-        cartValue.size = formData[i].value;
-      } else if (formData[i].type === "number") {
-        cartValue.quantity = formData[i].value;
+      if (product._id) {
+        if (formData[i].checked) {
+          (cartValue as CartForm).size = formData[i].value;
+        } else if (formData[i].type === "number") {
+          (cartValue as CartForm).quantity = Number(formData[i].value);
+        }
+      } else {
+        if (formData[i].checked) {
+          (cartValue as CartItems).product.size = formData[i].value;
+        } else if (formData[i].type === "number") {
+          (cartValue as CartItems).quantity = Number(formData[i].value);
+        }
       }
     }
 

@@ -8,11 +8,11 @@ const API_URL = "/api/cart/";
 const localUser: string | null = localStorage.getItem("user");
 let user: User;
 
-const addToCart = async (product: CartForm) => {
+const addToCart = async (product: CartForm | CartItems) => {
   try {
     if (localUser) {
       user = JSON.parse(localUser);
-      const response = await axios.post(API_URL, product, {
+      const response = await axios.post(API_URL, product as CartForm, {
         headers: authHeader(),
       });
       if (response) {
@@ -21,15 +21,32 @@ const addToCart = async (product: CartForm) => {
       return response.data;
     } else {
       let currentCart = localStorage.getItem("cart");
+      let newCart: CartItems = product as CartItems;
       let cart: Cart;
       if (currentCart) {
-        console.log("misy");
+        const cart: Cart = JSON.parse(currentCart);
+        const itemIndex = cart.items.findIndex(
+          (item) =>
+            item.product.name.toString() === newCart.product.name.toString()
+        );
+
+        if (itemIndex > -1) {
+          cart.items[itemIndex].quantity =
+            Number(cart.items[itemIndex].quantity) + Number(newCart.quantity);
+          cart.total += newCart.product.price * Number(newCart.quantity);
+        } else {
+          cart.items.push(newCart);
+          cart.total += newCart.product.price * Number(newCart.quantity);
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        return cart;
       } else {
-        // cart = {
-        //   items: [product],
-        //   total: 1000
-        // };
-        console.log(product);
+        cart = {
+          items: [newCart],
+          total: newCart.product.price * Number(newCart.quantity),
+        };
+        localStorage.setItem("cart", JSON.stringify(cart));
+        return cart;
       }
     }
   } catch (err: any) {
@@ -44,7 +61,9 @@ const getUserCart = async () => {
       return response.data;
     } else {
       const cart = localStorage.getItem("cart");
-      return cart;
+      if (cart) {
+        return JSON.parse(cart);
+      }
     }
   } catch (err: any) {
     return err.message;

@@ -1,3 +1,5 @@
+import { ImageObject } from "../features/product/product.slice";
+
 export interface Products {
   id: string;
   name: string;

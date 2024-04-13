@@ -28,7 +28,7 @@ import { RootState } from "../../app/store";
 import { useAppDispatch } from "../../app/hook";
 import { getUserCart, removeUserCart } from "../../features/cart/cart.slice";
 import { Loading } from "../Loading";
-import { setToLocalString } from "../../common";
+import { getBase64, setToLocalString } from "../../common";
 
 export const CartItems = () => {
   const [showCartItems, setShowCartItems] = useState<boolean>(false);
@@ -86,7 +86,9 @@ export const CartItems = () => {
                       </CartItemProduct>
                       <FontAwesomeIcon
                         icon={faXmark}
-                        onClick={() => handleRemoveFromCart(item.product._id)}
+                        onClick={() =>
+                          handleRemoveFromCart(String(item.product._id))
+                        }
                       />
                     </CartItem>
                   ))

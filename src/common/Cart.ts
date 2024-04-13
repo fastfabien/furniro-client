@@ -1,10 +1,11 @@
 import { ImageObject } from "../features/product/product.slice";
 
 export interface ProductCartItems {
-  _id: string;
+  _id?: string;
   name: string;
-  couverture: ImageObject;
+  couverture?: ImageObject;
   price: number;
+  size?: string;
 }
 
 export interface CartItems {
