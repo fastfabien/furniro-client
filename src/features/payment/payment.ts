@@ -1,5 +1,5 @@
 import { loadStripe } from "@stripe/stripe-js";
-import { Cart, Order, OrderValidation, PayOrder } from "../../common";
+import { OrderValidation, PayOrder } from "../../common";
 import axios from "axios";
 const API_URL = "/api/create-checkout-session/";
 const PUBLISHABLE_KEY = process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY!;

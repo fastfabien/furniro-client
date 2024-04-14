@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
 import { useAppDispatch } from "../../../app/hook";
 import { validateStripePayment } from "../../../features/cart/cart.slice";
 import { Loading } from "../../../components";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../app/store";
 
 export const PaymentValidation = () => {
+  const { cart, isLoading } = useSelector((state: RootState) => state.cart);
   const dispatch = useAppDispatch();
   const [rendered, setRendered] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
@@ -24,9 +25,11 @@ export const PaymentValidation = () => {
         })
         .catch((error) => error.message);
     }
+  }, [dispatch, id, address, navigate, rendered]);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  if (isLoading) {
+    return <Loading />;
+  }
 
-  return <Loading />;
+  return null;
 };
