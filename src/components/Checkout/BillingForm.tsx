@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FormRow } from "../../Styles";
 import { BillingAddress } from "./BillingAddress";
-import { Address, Cart, Order, PayOrder } from "../../common";
+import { Address, Cart, Order, PayOrder, getCartid } from "../../common";
 import { BillingDetails } from "./BillingDetails";
 import { stripePayment } from "../../features/payment/payment";
 import { createBillingAdress } from "../../features/billingAdress/billingAdress";
@@ -21,6 +21,7 @@ export const BillingForm = ({ cart }: BillingFormProps) => {
   const handlePlacePayment = async (e: any) => {
     e.preventDefault();
     const form = e.target;
+
     let formData: Address = {
       first_name: "",
       last_name: "",
@@ -45,11 +46,12 @@ export const BillingForm = ({ cart }: BillingFormProps) => {
     }
 
     const billingAdress = await createBillingAdress(formData);
+    const cartId = await getCartid(cart);
 
     const order: PayOrder = {
       billingAddress: billingAdress,
       total: cart.total,
-      cartId: String(cart._id),
+      cartId: cartId,
     };
 
     if (currentActive?.name === "stripe") {

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../app/store";
 import { useAppDispatch } from "../../../app/hook";
@@ -8,9 +8,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const PaymentValidation = () => {
   const dispatch = useAppDispatch();
-  const { cart, isLoading, isError } = useSelector(
-    (state: RootState) => state.cart
-  );
+  const [rendered, setRendered] = useState<boolean>(false);
   const [searchParams] = useSearchParams();
   const id = searchParams.get("id");
   const address = searchParams.get("address");
@@ -18,11 +16,17 @@ export const PaymentValidation = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (id && address) {
-      dispatch(validateStripePayment({ cartId: id, billingAddress: address }));
-      navigate("/thank-you");
+    if (!rendered && id && address) {
+      dispatch(validateStripePayment({ cartId: id, billingAddress: address }))
+        .then((data) => {
+          setRendered(true);
+          navigate("/thank-you");
+        })
+        .catch((error) => error.message);
     }
-  }, [dispatch, id, address, navigate]);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return <Loading />;
 };

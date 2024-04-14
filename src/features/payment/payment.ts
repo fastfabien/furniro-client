@@ -27,7 +27,7 @@ const stripePayment = async (order: PayOrder) => {
 const validatePayment = async (order: OrderValidation) => {
   try {
     const response = await axios.post(ORDER_URL, order);
-    localStorage.setItem("cart", JSON.stringify(response.data));
+    localStorage.removeItem("cart");
     return response.data;
   } catch (error: any) {
     return error.message;
